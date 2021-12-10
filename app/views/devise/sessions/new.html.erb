@@ -1,0 +1,49 @@
+<div class="auth-left">
+  <h1 class="auth-header">Добро пожаловать</h1>
+  <p class="auth-text">Если пока нет аккаунта - не беда, создайте его</p>
+  <%= link_to "Регистрация", new_registration_path(resource_name), class: 'auth-link' %>
+</div>
+<div class="auth-right">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form'}) do |f| %>
+    <div class="form-control">
+      <%= f.label :email, class: 'form-label'  %>
+      <%= f.email_field :email, autofocus: true,
+                        autocomplete: "email",
+                        class: 'form-input',
+                        required: true
+      %>
+    </div>
+
+    <div class="form-control">
+      <%= f.label :password, 'Пароль', class: 'form-label' %>
+      <%= f.password_field :password, autocomplete: "current-password",
+                           class: 'form-input',
+                           required: true,
+                           minLength: 6
+      %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="form-control">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me, 'Запомнить меня', class: 'form-label' %>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Войти", class: 'form-button', disabled: true %>
+    </div>
+
+    <%= link_to "Забыли пароль?", new_password_path(resource_name), class: 'form-link' %>
+  <% end %>
+
+  <div class="alert">
+    <%= alert %>
+  </div>
+
+  <%= render "devise/shared/notices" %>
+</div>
+
+<%= javascript_pack_tag 'devise/login' %>
+
+
