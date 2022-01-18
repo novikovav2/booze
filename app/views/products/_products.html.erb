@@ -1,0 +1,26 @@
+<table class="products-table">
+  <thead class="products-table_header">
+  <tr>
+    <td></td>
+    <td>Продукт</td>
+    <td>Цена</td>
+    <td>К-во</td>
+    <td>Купил</td>
+    <td>Употребляло</td>
+    <td></td>
+  </tr>
+  </thead>
+  <tbody class="products-table_body">
+  <% products.each do |product| %>
+    <tr>
+      <td><%= link_to 'x', root_path %></td>
+      <td><%= product.name %></td>
+      <td><%= product.price %></td>
+      <td><%= product.total %></td>
+      <td><%= product.buyer.email %></td>
+      <td>2 чел</td>
+      <td>я ел/пил</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

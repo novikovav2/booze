@@ -1,0 +1,58 @@
+<div class="title-container with-bottom-border">
+  <h1 class="title"><%= @event.name %></h1>
+  <%= link_to 'Изменить', edit_event_path(@event), class: "title-link" %>
+</div>
+
+<div class="event">
+  <div class="event-header">
+    <div class="event-reason">
+      <p class="event-fieldname">Повод:</p>
+      <p class="event-fieldvalue"><%= @event.description %></p>
+    </div>
+    <div class="event-fieldvalue">
+      <%= @event.evented_at %>
+    </div>
+  </div>
+  <div class="event-body">
+    <div class="event-left">
+      <p class="event-fieldname">Продукты</p>
+      <%= form_with(model: @product, url: products_path, html: {class: 'products-form'}, local: false) do |form| %>
+        <%= form.text_field :name, required: true,
+                            placeholder: 'Название',
+                            class: 'products-form-input products-form_name'
+        %>
+
+        <%= form.number_field :price, min: 0, max: 100000,
+                            placeholder: 'Стоимость',
+                            class: 'products-form-input products-form_price'
+        %>
+
+        <%= form.collection_select :buyer_id, @participants, :id, :email,
+                                   {prompt: 'Покупатель'},
+                                   {class: 'products-form-input products-form_buyer'}
+        %>
+
+        <%= form.number_field :total, min: 0, max: 100000,
+                              placeholder: 'Количество',
+                              class: 'products-form-input products-form_price'
+        %>
+
+        <%= form.hidden_field :event_id, value: @event.id %>
+
+        <%= form.submit "Добавить", class: 'products-form-submit' %>
+      <% end %>
+
+      <div id="table">
+        <%= render '/products/products', products: @products %>
+      </div>
+
+    </div>
+    <div class="event-right">
+      <p class="event-fieldname">Участники</p>
+    </div>
+  </div>
+</div>
+
+
+
+<%= link_to 'Back', events_path %>

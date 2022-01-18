@@ -1,0 +1,214 @@
+.events {
+  &-title {
+    margin-top: 40px;
+  }
+
+  &-row {
+    border-top: 1px solid $light;
+    border-bottom: 1px solid $light;
+    padding: 13px 30px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #000000;
+    display: flex;
+  }
+
+}
+
+.fields {
+  &-name {
+    flex: 1;
+  }
+
+  &-descr {
+    flex: 2;
+  }
+
+  &-date {
+    flex: 1;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  &-control {
+    margin-top: 35px;
+    display: flex;
+  }
+
+  &-label {
+    text-align: end;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: $dark;
+    flex-wrap: wrap;
+    flex-basis: 200px;
+  }
+
+  &-input {
+    flex-basis: 600px;
+    margin-left: 36px;
+    background: #FFFFFF;
+    border: 1px solid $dark;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  &-buttons {
+    margin-top: 26px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-button {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 8px 20px;
+    border-radius: 31px;
+  }
+
+  &-apply {
+    background: $brandColor;
+  }
+
+  &-cancel {
+    background: $dark;
+  }
+}
+
+.event {
+  margin-top: 26px;
+
+  &-left {
+    flex: 2;
+    margin-right: 36px;
+  }
+
+  &-right {
+    flex: 1;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-body {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 50px;
+  }
+
+  &-reason {
+    display: flex;
+  }
+
+  &-fieldname {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: $dark;
+  }
+
+  &-fieldvalue {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #000000;
+    margin-left: 21px;
+  }
+}
+
+.products {
+  &-form {
+    display: flex;
+    margin-top: 16px;
+
+    &-input {
+      padding: 3px 13px;
+      background: #FFFFFF;
+      border: 1px solid $dark;
+      border-radius: 4px;
+      margin-right: 20px;
+    }
+
+    &_name {
+      width: 100px;
+    }
+
+    &_price {
+      width: 90px;
+    }
+
+    &_buyer {
+      width: 100px;
+    }
+
+    &-submit {
+      background: $brandColor;
+      border: 2px solid $brandColor;
+      border-radius: 8px;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 21px;
+      color: #FFFFFF;
+      padding: 4px 8px;
+
+      &:hover {
+        box-shadow: 0 0 5px $brandColor;
+      }
+    }
+  }
+
+  &-table {
+    margin-top: 32px;
+    width: 100%;
+    text-align: center;
+    max-height: 600px;
+    overflow-y: scroll;
+
+    &, tr, td {
+      border: 1px solid $light;
+      border-collapse: collapse;
+    }
+
+    &_header {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 18px;
+      color: $dark;
+
+      & td {
+        padding: 6px 0;
+      }
+    }
+
+    &_body {
+      color: black;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 18px;
+
+      & td {
+        padding: 6px 0;
+      }
+    }
+  }
+
+
+}

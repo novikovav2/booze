@@ -1,5 +1,12 @@
 @import "variables";
 
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, sans-serif;
+  text-decoration: none;
+}
+
 .auth {
   margin: 0 auto;
   margin-top: 160px;
