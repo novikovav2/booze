@@ -27,7 +27,7 @@
                             class: 'products-form-input products-form_price'
         %>
 
-        <%= form.collection_select :buyer_id, @participants, :id, :email,
+        <%= form.collection_select :buyer_id, @members, :id, :email,
                                    {prompt: 'Покупатель'},
                                    {class: 'products-form-input products-form_buyer'}
         %>
@@ -49,6 +49,22 @@
     </div>
     <div class="event-right">
       <p class="event-fieldname">Участники</p>
+      <div class="join">
+        <p class="join-title">Пригласить:</p>
+        <%= link_to join_url(@event.join_id), "#", class: 'join-link', id: 'join-link' %>
+
+        <div class="join-confirm" id="join-confirm">
+          Скопировано!
+        </div>
+
+      </div>
+      <div class="members">
+        <ul>
+          <% @members.each do |member| %>
+            <li class="members-item"><%= member.email %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -56,3 +72,5 @@
 
 
 <%= link_to 'Back', events_path %>
+
+<%= javascript_pack_tag 'events/join' %>

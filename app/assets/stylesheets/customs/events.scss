@@ -179,6 +179,7 @@
     text-align: center;
     max-height: 600px;
     overflow-y: scroll;
+    max-width: 800px;
 
     &, tr, td {
       border: 1px solid $light;
@@ -209,6 +210,44 @@
       }
     }
   }
+}
 
+.join {
+  background: rgba(220, 220, 220, 0.16);
+  width: 100%;
+  padding: 8px 12px;
+  margin-top: 4px;
+  position: relative;
 
+  &-title {
+    margin-bottom: 12px;
+  }
+
+  &-link {
+    text-decoration: none;
+    color: $dark;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &-confirm {
+    background: $brandColor;
+    position: absolute;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    top: 16px;
+    right: 16px;
+    display: none;
+  }
+}
+
+.members {
+  padding: 16px 24px;
+
+  &-item {
+    margin-bottom: 12px;
+  }
 }

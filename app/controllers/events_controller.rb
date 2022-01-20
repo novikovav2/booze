@@ -2,31 +2,37 @@ class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
 
-  # GET /customs or /customs.json
+  # GET /events or /events.json
   def index
-    @events = current_user.events.all
+    @events = []
+    @events = (current_user.events.to_a + current_user.member_of.to_a).uniq
   end
 
-  # GET /customs/1 or /customs/1.json
+  # GET /events/1 or /events/1.json
   def show
     @product = Product.new
     @products = @event.products
-    @participants = User.all # ЗАменить потом на выборку только участников пьянки
+
+    @members = []
+    @members << @event.user
+    @members = (@members + @event.members.to_a).uniq
+
   end
 
-  # GET /customs/new
+  # GET /events/new
   def new
     @event = Event.new
   end
 
-  # GET /customs/1/edit
+  # GET /events/1/edit
   def edit
   end
 
-  # POST /customs or /customs.json
+  # POST /events or /events.json
   def create
     # @event = Event.new(event_params)
     @event = current_user.events.new(event_params)
+    @event.join_id = (0...8).map { (65 + rand(26)).chr }.join
 
     respond_to do |format|
       if @event.save
@@ -39,7 +45,7 @@ class EventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /customs/1 or /customs/1.json
+  # PATCH/PUT /events/1 or /events/1.json
   def update
     respond_to do |format|
       if @event.update(event_params)
@@ -52,12 +58,23 @@ class EventsController < ApplicationController
     end
   end
 
-  # DELETE /customs/1 or /customs/1.json
+  # DELETE /events/1 or /events/1.json
   def destroy
     @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url, notice: "Event was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+  
+  # GET /join/:id
+  def join
+    @event = Event.where(join_id: params[:id])[0]
+    if @event
+      @event.members.push(current_user)
+      redirect_to event_path(@event), notice: "Вы стали участником веселья! ;)"
+    else
+      redirect_to root_path, alert: "Такого мероприятия не найдено ;("
     end
   end
 

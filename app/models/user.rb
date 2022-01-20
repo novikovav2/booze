@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :events
   has_many :products
+  has_and_belongs_to_many :member_of, class_name: 'Event'
 
   validates :email, presence: true
   validates :password, presence: true
