@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[ show edit update destroy ]
+  before_action :set_event, only: %i[ show edit update destroy leave]
   before_action :authenticate_user!
 
   # GET /events or /events.json
@@ -16,6 +16,10 @@ class EventsController < ApplicationController
     @members = []
     @members << @event.user
     @members = (@members + @event.members.to_a).uniq
+
+    if !@members.include?(current_user)
+      redirect_to root_path
+    end
 
   end
 
@@ -76,6 +80,12 @@ class EventsController < ApplicationController
     else
       redirect_to root_path, alert: "Такого мероприятия не найдено ;("
     end
+  end
+
+  # GET /leave/:id
+  def leave
+    @event.members.destroy(current_user)
+    redirect_to root_path, notice: 'Вы покинули встречу'
   end
 
   private

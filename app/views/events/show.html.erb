@@ -48,7 +48,17 @@
 
     </div>
     <div class="event-right">
-      <p class="event-fieldname">Участники</p>
+      <div class="event-right_header">
+        <p class="event-fieldname">Участники</p>
+
+        <% if @event.user != current_user %>
+          <%= link_to 'Покинуть', leave_path(@event), class: 'leave-link',
+                      data: { confirm: 'Вы убеверны, что не хотите участвовать в этом веселье?'} %>
+        <% end %>
+
+      </div>
+
+
       <div class="join">
         <p class="join-title">Пригласить:</p>
         <%= link_to join_url(@event.join_id), "#", class: 'join-link', id: 'join-link' %>

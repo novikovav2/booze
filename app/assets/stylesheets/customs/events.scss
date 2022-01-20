@@ -96,6 +96,11 @@
 
   &-right {
     flex: 1;
+
+    &_header {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   &-header {
@@ -249,5 +254,14 @@
 
   &-item {
     margin-bottom: 12px;
+  }
+}
+
+.leave-link {
+  text-decoration: none;
+  color: #B00100;
+
+  &:hover {
+    text-decoration: underline;
   }
 }
