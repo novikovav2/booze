@@ -21,6 +21,8 @@ class EventsController < ApplicationController
       redirect_to root_path
     end
 
+    @owner = @event.user == current_user
+
   end
 
   # GET /events/new

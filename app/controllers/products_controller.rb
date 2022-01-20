@@ -5,7 +5,8 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        @products = Product.all
+        @products = @product.event.products
+        # @products = Product.all
         format.js
       else
         redirect_to event_path(product_params.event_id)

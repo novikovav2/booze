@@ -1,6 +1,16 @@
 <div class="title-container with-bottom-border">
   <h1 class="title"><%= @event.name %></h1>
-  <%= link_to 'Изменить', edit_event_path(@event), class: "title-link" %>
+  <div>
+    <%= link_to 'Изменить', edit_event_path(@event), class: "title-link" %>
+
+    <% if @owner %>
+      <%= link_to 'Удалить', event_path(@event), class: 'delete-link',
+                  method: :delete,
+                  data: { confirm: 'Вы уверены, что хотите удалить такое мероприятие?' }
+      %>
+    <% end %>
+
+  </div>
 </div>
 
 <div class="event">
@@ -51,7 +61,7 @@
       <div class="event-right_header">
         <p class="event-fieldname">Участники</p>
 
-        <% if @event.user != current_user %>
+        <% if !@owner %>
           <%= link_to 'Покинуть', leave_path(@event), class: 'leave-link',
                       data: { confirm: 'Вы убеверны, что не хотите участвовать в этом веселье?'} %>
         <% end %>
@@ -71,7 +81,14 @@
       <div class="members">
         <ul>
           <% @members.each do |member| %>
-            <li class="members-item"><%= member.email %></li>
+            <li class="members-item">
+              <%= member.email %>
+
+              <% if member == @event.user %>
+                (Организатор)
+              <% end %>
+
+            </li>
           <% end %>
         </ul>
       </div>
