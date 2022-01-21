@@ -191,6 +191,7 @@
       border-collapse: collapse;
     }
 
+
     &_header {
       font-style: normal;
       font-weight: normal;
@@ -211,7 +212,7 @@
       line-height: 18px;
 
       & td {
-        padding: 6px 0;
+        padding: 6px 8px;
       }
     }
   }
@@ -238,11 +239,11 @@
   }
 
   &-confirm {
-    background: $brandColor;
+    //background: $brandColor;
     position: absolute;
-    color: white;
+    color: $brandColor;
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: 16px;
     top: 16px;
     right: 16px;
     display: none;
@@ -273,5 +274,13 @@
 
   &:hover {
     text-decoration: underline;
+  }
+}
+
+.trash-link {
+  color: $dark;
+
+  &:hover {
+    color: black;
   }
 }

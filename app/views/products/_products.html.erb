@@ -13,7 +13,12 @@
   <tbody class="products-table_body">
   <% products.each do |product| %>
     <tr>
-      <td><%= link_to 'x', root_path %></td>
+      <td>
+        <%= link_to product_path(product), method: :delete,
+                    class: 'trash-link', remote: true do %>
+          <i class="far fa-trash-alt"></i>
+        <% end %>
+      </td>
       <td><%= product.name %></td>
       <td><%= product.price %></td>
       <td><%= product.total %></td>

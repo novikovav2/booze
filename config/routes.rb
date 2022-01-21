@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root to: 'events#index'
 
-  resources :products, only: :create
+  resources :products, only: [:create, :destroy]
 
   get '/join/:id', to: 'events#join', as: 'join'
   get '/leave/:id', to: 'events#leave', as: 'leave'
