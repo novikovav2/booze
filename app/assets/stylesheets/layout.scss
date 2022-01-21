@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 34px;
+  margin-bottom: 14px;
 
   &-title {
     font-family: Raleway;
@@ -20,6 +20,15 @@
     font-size: 18px;
     line-height: 21px;
     color: $brandColor;
+  }
+}
+
+.back-link {
+  text-decoration: none;
+  color: $dark;
+
+  &:hover {
+    text-decoration: underline;
   }
 }
 
@@ -53,13 +62,18 @@
   color: #000000;
   margin-bottom: 16px;
 
+  &-rightblock {
+    display: flex;
+    align-items: center;
+  }
+
   &-container {
+    margin-top: 26px;
     display: flex;
     justify-content: space-between;
   }
 
   &-link {
-    margin-top: 8px;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;

@@ -1,6 +1,10 @@
+<%= link_to events_path, class: 'back-link' do %>
+  <i class="far fa-arrow-alt-circle-left"></i> Назад
+<% end %>
+
 <div class="title-container with-bottom-border">
   <h1 class="title"><%= @event.name %></h1>
-  <div>
+  <div class="title-rightblock">
     <%= link_to 'Изменить', edit_event_path(@event), class: "title-link" %>
 
     <% if @owner %>
@@ -98,6 +102,6 @@
 
 
 
-<%= link_to 'Back', events_path %>
+
 
 <%= javascript_pack_tag 'events/join' %>
