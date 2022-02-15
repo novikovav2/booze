@@ -26,20 +26,36 @@
       </td>
       <td><%= product.name %></td>
       <td><%= product.price %></td>
-      <td><%= product.total %></td>
-      <td><%= product.buyer.email %></td>
+      <td>
+        <% if product.total %>
+          <%= product.total %>
+        <% else %>
+          -
+        <% end %>
+      </td>
+      <td><%= product.buyer.username %></td>
       <td><%= Eater.where({product_id: product.id}).select(:user_id).distinct.length %> чел.</td>
       <% ate_total = Eater.where({product_id: product.id, user_id: current_user.id}).length %>
-      <td><%= ate_total %> шт.</td>
-        <td>
+      <td>
+        <% if product.total %>
+          <%= ate_total %> шт.
+        <% else %>
+          -
+        <% end %>
+      </td>
+      <td>
           <% if ate_total == 0 %>
-            <%=  link_to 'Да', add_eater_path(product), method: :put, remote: true  %>
-          <% else %>
+            Нет
+            <%=  link_to ' (Да)', add_eater_path(product), method: :put, remote: true  %>
+          <% elsif product.total %>
             <%=  link_to '+1', add_eater_path(product), method: :put, remote: true  %>
             /
             <%= link_to 'Нет', delete_eater_path(product), method: :delete, remote: true %>
+          <% else %>
+            Да
+            <%= link_to ' (Нет)', delete_eater_path(product), method: :delete, remote: true %>
           <% end %>
-        </td>
+      </td>
     </tr>
   <% end %>
   </tbody>

@@ -95,3 +95,29 @@
   //padding-bottom: 20px;
   border-bottom: 1px solid $light;
 }
+
+.toaster {
+  &-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  width: 400px;
+  position: fixed;
+  bottom: 0;
+  padding: 16px 16px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+
+
+  &-notice {
+    background-color: #f9ffe9;
+  }
+
+  &-alert {
+    background-color: #fd7b99;
+  }
+}

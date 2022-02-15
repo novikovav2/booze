@@ -1,0 +1,24 @@
+<div class="toaster-container">
+  <% if notice %>
+    <div class="toaster toaster-notice" id="notice">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <% if alert %>
+    <div class="toaster toaster-alert" id="alert">
+      <%= alert %>
+    </div>
+  <% end %>
+
+</div>
+
+<script>
+  const notice = document.getElementById("notice")
+  const alert = document.getElementById("alert")
+
+  setTimeout(() => {
+      notice.style.display = 'none'
+      alert.style.display = 'none'
+  }, 3000)
+</script>
