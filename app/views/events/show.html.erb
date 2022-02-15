@@ -96,7 +96,7 @@
         <ul>
           <% @members.each do |member| %>
             <li class="members-item">
-              <%= member.email %>
+              <%= member.username %>
 
               <% if member == @event.user %>
                 (Организатор)

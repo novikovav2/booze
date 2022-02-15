@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'profile/update'
   resources :events
 
   devise_for :users
@@ -14,6 +15,10 @@ Rails.application.routes.draw do
   delete 'products/:id/eaters', to: 'products#delete_eater', as: 'delete_eater'
 
   post '/products/complete', to: 'products#addition_complete', as: 'products_complete'
+
+  get '/profile', to: 'profile#index', as: 'profile'
+  post '/profile', to: 'profile#new'
+  patch '/profile', to: 'profile#update'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

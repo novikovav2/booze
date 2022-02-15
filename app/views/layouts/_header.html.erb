@@ -3,5 +3,9 @@
     <%= link_to "На сколько же я выпил...", root_path %>
   </p>
 
-  <%= link_to 'Выход', destroy_user_session_path, method: :delete, class: 'header-text' %>
+  <div>
+    <%= link_to current_user.username, profile_path, class: 'header-text' %>
+    <%= link_to 'Выход', destroy_user_session_path, method: :delete, class: 'header-text' %>
+  </div>
+
 </header>

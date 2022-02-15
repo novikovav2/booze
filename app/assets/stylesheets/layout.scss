@@ -17,9 +17,14 @@
   }
 
   &-text {
+    margin-right: 16px;
     font-size: 18px;
     line-height: 21px;
     color: $brandColor;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
