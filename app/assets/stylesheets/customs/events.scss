@@ -141,24 +141,31 @@
     display: flex;
     margin-top: 16px;
 
+    &_comment {
+      max-width: 900px;
+      color: $dark;
+      margin-top: 8px;
+      font-size: small;
+    }
+
     &-input {
       padding: 3px 13px;
       background: #FFFFFF;
-      border: 1px solid $dark;
+      border: 1px solid black;
       border-radius: 4px;
       margin-right: 20px;
     }
 
     &_name {
-      width: 100px;
+      width: 200px;
     }
 
     &_price {
-      width: 90px;
+      width: 120px;
     }
 
     &_buyer {
-      width: 100px;
+      width: 150px;
     }
 
     &-submit {
@@ -178,13 +185,18 @@
     }
   }
 
+  &-total {
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
   &-table {
-    margin-top: 32px;
+
     width: 100%;
     text-align: center;
     max-height: 600px;
     overflow-y: scroll;
-    max-width: 800px;
+    max-width: 900px;
 
     &, tr, td {
       border: 1px solid $light;

@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_19_095353) do
+ActiveRecord::Schema.define(version: 2022_02_14_102725) do
+
+  create_table "eaters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_eaters_on_product_id"
+    t.index ["user_id"], name: "index_eaters_on_user_id"
+  end
 
   create_table "events", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -20,6 +30,8 @@ ActiveRecord::Schema.define(version: 2022_01_19_095353) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "join_id"
+    t.boolean "complete"
+    t.boolean "products_complete"
     t.index ["join_id"], name: "index_events_on_join_id", unique: true
     t.index ["user_id"], name: "index_events_on_user_id"
   end
@@ -43,6 +55,13 @@ ActiveRecord::Schema.define(version: 2022_01_19_095353) do
     t.index ["event_id"], name: "index_products_on_event_id"
   end
 
+  create_table "products_users", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["product_id"], name: "index_products_users_on_product_id"
+    t.index ["user_id"], name: "index_products_users_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -55,6 +74,8 @@ ActiveRecord::Schema.define(version: 2022_01_19_095353) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "eaters", "products"
+  add_foreign_key "eaters", "users"
   add_foreign_key "events", "users"
   add_foreign_key "products", "events"
   add_foreign_key "products", "users", column: "buyer_id"
