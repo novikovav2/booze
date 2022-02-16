@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get '/profile', to: 'profile#index', as: 'profile'
   post '/profile', to: 'profile#new'
   patch '/profile', to: 'profile#update'
+  patch '/profile/password', to: 'profile#change_password', as: 'change_password'
 
   get '/events/:id/results', to: 'events#results', as: 'event_results'
 

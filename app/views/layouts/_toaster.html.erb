@@ -3,24 +3,26 @@
     <div class="toaster toaster-notice" id="notice">
       <%= notice %>
     </div>
+
+    <script>
+        const notice = document.getElementById("notice")
+        setTimeout(() => {
+            notice.style.display = 'none'
+        }, 3000)
+    </script>
   <% end %>
 
   <% if alert %>
     <div class="toaster toaster-alert" id="alert">
       <%= alert %>
     </div>
+
+    <script>
+        const alert = document.getElementById("alert")
+        setTimeout(() => {
+            alert.style.display = 'none'
+        }, 3000)
+    </script>
   <% end %>
 
 </div>
-
-<% if notice || alert %>
-<script>
-  const notice = document.getElementById("notice")
-  const alert = document.getElementById("alert")
-
-  setTimeout(() => {
-      notice.style.display = 'none'
-      alert.style.display = 'none'
-  }, 3000)
-</script>
-<% end %>

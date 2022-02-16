@@ -3,6 +3,7 @@ class ProfileController < ApplicationController
 
   # GET /profile
   def index
+    @user = current_user
     @profile = current_user.profile
   end
 
@@ -32,8 +33,23 @@ class ProfileController < ApplicationController
     end
   end
 
+  # PATCH /
+  def change_password
+    @user = current_user
+    if @user.update(user_params)
+      bypass_sign_in(@user)
+      redirect_to profile_path, notice: 'Пароль успешно обновлен'
+    else
+      redirect_to profile_path, alert: 'Хм... Не удалось сменить пароль'
+    end
+  end
+
   private
   def profile_params
     params.fetch(:profile, {}).permit(:name, :surname)
+  end
+
+  def user_params
+    params.require(:user).permit(:password, :password_confirmation)
   end
 end

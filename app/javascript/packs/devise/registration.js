@@ -1,4 +1,4 @@
-const formButton = document.getElementsByClassName('form-button')[0]
+const formButton = document.getElementById('submitBtn')
 const emailInput = document.getElementById('user_email')
 const passwordInput = document.getElementById('user_password')
 const confirmInput = document.getElementById('user_password_confirmation')
