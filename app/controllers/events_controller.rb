@@ -18,7 +18,7 @@ class EventsController < ApplicationController
     @members << @event.user
     @members = (@members + @event.members.to_a).uniq
 
-    redirect_to root_path if !@members.include?(current_user)
+    # redirect_to root_path if !@members.include?(current_user)
 
     @owner = @event.user == current_user
 

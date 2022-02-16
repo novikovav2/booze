@@ -25,7 +25,7 @@
     </div>
     <%= link_to 'Подвести итоги', event_results_path(@event), class: 'result-link' %>
     <div class="event-fieldvalue">
-      <%= @event.evented_at %>
+      <%= I18n.l(@event.evented_at.to_time, :format => '%e %B %Y') %>
     </div>
   </div>
   <div class="event-body">
@@ -42,7 +42,7 @@
                             class: 'products-form-input products-form_price'
         %>
 
-        <%= form.collection_select :buyer_id, @members, :id, :email,
+        <%= form.collection_select :buyer_id, @members, :id, :username,
                                    {prompt: 'Покупатель'},
                                    {class: 'products-form-input products-form_buyer'}
         %>

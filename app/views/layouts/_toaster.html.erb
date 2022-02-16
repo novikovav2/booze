@@ -13,6 +13,7 @@
 
 </div>
 
+<% if notice || alert %>
 <script>
   const notice = document.getElementById("notice")
   const alert = document.getElementById("alert")
@@ -22,3 +23,4 @@
       alert.style.display = 'none'
   }, 3000)
 </script>
+<% end %>
