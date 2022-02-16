@@ -329,6 +329,32 @@
     padding: 16px 8px;
     text-align: center;
   }
-
-
 }
+
+.tooltip {
+  position: relative;
+  //display: inline-block;
+  //border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 200px;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid black;
+  text-align: left;
+  border-radius: 6px;
+  padding: 5px 24px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -15px;
+  left: 80%;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}
+

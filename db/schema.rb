@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_15_030639) do
+ActiveRecord::Schema.define(version: 2022_02_16_034017) do
 
   create_table "eaters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id", null: false
@@ -30,8 +30,6 @@ ActiveRecord::Schema.define(version: 2022_02_15_030639) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "join_id"
-    t.boolean "complete"
-    t.boolean "products_complete"
     t.index ["join_id"], name: "index_events_on_join_id", unique: true
     t.index ["user_id"], name: "index_events_on_user_id"
   end
@@ -79,7 +77,6 @@ ActiveRecord::Schema.define(version: 2022_02_15_030639) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

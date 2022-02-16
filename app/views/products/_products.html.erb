@@ -34,7 +34,18 @@
         <% end %>
       </td>
       <td><%= product.buyer.username %></td>
-      <td><%= Eater.where({product_id: product.id}).select(:user_id).distinct.length %> чел.</td>
+      <td class="tooltip">
+        <%= Eater.where({product_id: product.id}).select(:user_id).distinct.length %> чел.
+        <div class="tooltip-text">
+          <ul>
+            <% Eater.where({product_id: product.id}).select(:user_id).distinct.each do |eater| %>
+              <li>
+                <%= User.find(eater.user_id).username %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </td>
       <% ate_total = Eater.where({product_id: product.id, user_id: current_user.id}).length %>
       <td>
         <% if product.total %>
