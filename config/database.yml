@@ -49,7 +49,4 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: booze_production
-  username: booze
-  password: <%= ENV['BOOZE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
