@@ -25,7 +25,7 @@
     </div>
     <%= link_to 'Подвести итоги', event_results_path(@event), class: 'result-link' %>
     <div class="event-fieldvalue">
-      <%= I18n.l(@event.evented_at.to_time, :format => '%e %B %Y') %>
+      <%= I18n.l(@event.evented_at.to_time, :format => '%e %B %Y') if @event.evented_at %>
     </div>
   </div>
   <div class="event-body">

@@ -1,6 +1,6 @@
 <div class="container">
-  <%= link_to 'Добавить пьянку', new_event_path, class: "button brand-color" %>
-  <h1 class="title events-title">Пьянки:</h1>
+  <%= link_to 'Добавить мероприятие', new_event_path, class: "button brand-color" %>
+  <h1 class="title events-title">Мероприятия:</h1>
   <div>
     <% @events.each do |event| %>
       <div class="events-row">
@@ -13,7 +13,7 @@
         </div>
 
         <div class="fields-date">
-          <%= event.evented_at %>
+          <%= I18n.l(event.evented_at.to_time, :format => '%e %B %Y') if event.evented_at %>
         </div>
       </div>
     <% end %>
