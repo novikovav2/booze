@@ -23,6 +23,7 @@
       <p class="event-fieldname">Повод:</p>
       <p class="event-fieldvalue"><%= @event.description %></p>
     </div>
+    <%= link_to 'Подвести итоги', event_results_path(@event), class: 'result-link' %>
     <div class="event-fieldvalue">
       <%= @event.evented_at %>
     </div>

@@ -1,5 +1,13 @@
 @import "variables";
 
+.df {
+  display: flex;
+}
+
+.jc-sb {
+  justify-content: space-between;
+}
+
 .header {
   padding: 21px 40px;
   display: flex;

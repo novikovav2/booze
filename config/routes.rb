@@ -20,5 +20,7 @@ Rails.application.routes.draw do
   post '/profile', to: 'profile#new'
   patch '/profile', to: 'profile#update'
 
+  get '/events/:id/results', to: 'events#results', as: 'event_results'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

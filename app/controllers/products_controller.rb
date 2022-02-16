@@ -17,6 +17,7 @@ class ProductsController < ApplicationController
 
   # DELETE /products/:id
   def destroy
+    Eater.where({product_id: @product.id}).destroy_all
     @product.destroy
     @products = @event.products
     respond_to do |format|

@@ -169,8 +169,9 @@
     }
 
     &-submit {
-      background: $brandColor;
-      border: 2px solid $brandColor;
+      //background: $brandColor;
+      border: 1px solid $brandColor;
+      background-color: $dark;
       border-radius: 8px;
       font-style: normal;
       font-weight: normal;
@@ -295,4 +296,39 @@
   &:hover {
     color: black;
   }
+}
+
+.result {
+  &-link {
+    background: $brandColor;
+    border: 2px solid $brandColor;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #FFFFFF;
+    padding: 4px 8px;
+
+    &:hover {
+      box-shadow: 0 0 5px $brandColor;
+    }
+  }
+
+  min-width: 600px;
+
+  &-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 64px;
+  }
+
+  &, th, td {
+    border-collapse: collapse;
+    border: 1px solid $dark;
+    padding: 16px 8px;
+    text-align: center;
+  }
+
+
 }
