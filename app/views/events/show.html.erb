@@ -31,41 +31,7 @@
   <div class="event-body">
     <div class="event-left">
       <p class="event-fieldname">Продукты</p>
-      <%= form_with(model: @product, url: products_path, html: {class: 'products-form'}, local: false) do |form| %>
-        <%= form.text_field :name, required: true,
-                            placeholder: 'Название',
-                            class: 'products-form-input products-form_name'
-        %>
-
-        <%= form.number_field :price, min: 0, max: 100000,
-                            placeholder: 'Стоимость',
-                            class: 'products-form-input products-form_price'
-        %>
-
-        <%= form.collection_select :buyer_id, @members, :id, :username,
-                                   {prompt: 'Покупатель'},
-                                   {class: 'products-form-input products-form_buyer'}
-        %>
-
-        <%= form.number_field :total, min: 0, max: 100000,
-                              placeholder: 'Количество*',
-                              class: 'products-form-input products-form_price'
-        %>
-
-        <%= form.hidden_field :event_id, value: @event.id %>
-
-        <%= form.submit "Добавить", class: 'products-form-submit' %>
-      <% end %>
-
-      <p class="products-form_comment">
-        * Количество продукта надо указывать, если важно разделить его не поровну между всеми. Пример: <br>
-        - Вы купили 10 бутылок пива. <br>
-        - Иван выпил 2 бутылку<br>
-        - Денис не стал пить пиво<br>
-        - Саша выпил 8 штук. <br>
-        В этом случае указывает, что было куплено 10 бутылок и затем каждый отмечает у себя то количество,
-        которое на самом деле выпил.
-      </p>
+      <%= render 'events/products_form' %>
 
       <div id="table">
         <%= render '/products/products', products: @products %>

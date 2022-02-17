@@ -154,7 +154,7 @@
 
 .products {
   &-form {
-    display: flex;
+    //display: flex;
     margin-top: 16px;
 
     &_comment {
@@ -181,7 +181,7 @@
     }
 
     &_buyer {
-      width: 150px;
+      width: 200px;
     }
 
     &-submit {
@@ -374,3 +374,4 @@
   visibility: visible;
 }
 
+@import "events/products-form";

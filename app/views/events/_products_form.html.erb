@@ -1,0 +1,45 @@
+<%= form_with(model: @product, url: products_path, html: {class: 'add-form'}, local: false) do |form| %>
+  <div class="add-form-container">
+    <%= form.text_field :name, required: true,
+                        placeholder: 'Название',
+                        class: 'products-form-input products-form_name'
+    %>
+
+    <%= form.number_field :price, min: 0, max: 100000,
+                          placeholder: 'Стоимость',
+                          class: 'products-form-input products-form_price'
+    %>
+
+    <%= form.collection_select :buyer_id, @members, :id, :username,
+                               {prompt: 'Покупатель'},
+                               {class: 'products-form-input products-form_buyer'}
+    %>
+
+    <%= form.hidden_field :event_id, value: @event.id %>
+
+    <%= form.submit "Добавить", class: 'products-form-submit' %>
+  </div>
+
+  <input type="checkbox" id="countable" name="countable"/>
+  <label for="countable">Требует поштучного учета</label>
+
+  <div class="add-form-hidden" id="hidden">
+    <%= form.number_field :total, min: 0, max: 100000,
+                          placeholder: 'Количество*',
+                          class: 'products-form-input products-form_price'
+    %>
+
+    <p class="products-form_comment">
+      * Количество продукта надо указывать, если важно разделить его не поровну между всеми. Пример: <br>
+      - Вы купили 10 бутылок пива. <br>
+      - Иван выпил 2 бутылку<br>
+      - Денис не стал пить пиво<br>
+      - Саша выпил 8 штук. <br>
+      В этом случае указывает, что было куплено 10 бутылок и затем каждый отмечает у себя то количество,
+      которое на самом деле выпил. В результате Иван оплатит 2/10 стоимости всего пива, Денис ничего не заплатит,
+      а Саша заплатит 8/10.
+    </p>
+  </div>
+<% end %>
+
+<%= javascript_pack_tag 'events/products-form' %>
