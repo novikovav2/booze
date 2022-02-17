@@ -1,0 +1,63 @@
+@media screen and (max-width: 597px) {
+  .auth {
+    max-width: 360px;
+
+    &-left {
+      min-width: auto;
+    }
+
+    &-logo {
+      font-size: 28px;
+      line-height: 28px;
+      margin-top: 16px;
+    }
+
+    &-header {
+      margin-top: 24px;
+      font-size: 18px;
+      line-height: 26px;
+    }
+
+    &-text {
+      font-size: 12px;
+      line-height: 18px;
+      margin-top: 8px;
+    }
+
+    &-link {
+      font-size: 16px;
+      padding: 6px 0;
+      width: 180px;
+      border: 1px solid #FFFFFF;
+    }
+  }
+
+  .form {
+    width: 300px;
+
+    &-control {
+      margin-bottom: 24px;
+    }
+
+    &-label {
+      font-size: 12px;
+      line-height: 18px;
+    }
+
+    &-input {
+      padding: 8px 6px;
+      width: 95%;
+      font-size: 14px;
+    }
+
+    &-button {
+      font-size: 16px;
+      padding: 8px 0;
+    }
+
+    &-link {
+      margin-top: 18px;
+      font-size: 14px;
+    }
+  }
+}
