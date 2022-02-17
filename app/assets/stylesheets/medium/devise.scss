@@ -1,0 +1,40 @@
+@media screen and (max-width: 1007px) {
+  .auth {
+    flex-direction: column;
+    margin-top: 8px;
+    max-width: 800px;
+    height: auto;
+
+    &-left {
+      padding-bottom: 16px;
+      border-radius: 16px 16px 0 0;
+    }
+
+    &-logo {
+      margin-top: 32px;
+    }
+
+    &-header {
+      margin-top: 48px;
+    }
+
+    &-text {
+      margin-top: 10px;
+    }
+
+    &-link {
+      margin-top: 16px;
+      width: 300px;
+    }
+
+    &-right {
+      padding-top: 16px;
+    }
+  }
+
+  .form {
+    &-link {
+      margin-top: 24px;
+    }
+  }
+}

@@ -34,7 +34,7 @@
     justify-content: center;
   }
 
-  &-header {
+  &-logo {
     font-family: Raleway, sans-serif;
     font-style: normal;
     font-weight: bold;
@@ -42,7 +42,19 @@
     letter-spacing: 0.1em;
     line-height: 42px;
     color: #FFFFFF;
-    margin-top: 200px;
+    margin-top: 72px;
+    text-align: center;
+  }
+
+  &-header {
+    font-family: Raleway, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    letter-spacing: 0.1em;
+    line-height: 36px;
+    color: #FFFFFF;
+    margin-top: 102px;
     text-align: center;
   }
 
@@ -177,3 +189,5 @@
   width: 400px;
   text-align: center;
 }
+
+@import "medium/devise";
