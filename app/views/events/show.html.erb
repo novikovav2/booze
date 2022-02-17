@@ -8,7 +8,7 @@
     <%= link_to 'Изменить', edit_event_path(@event), class: "title-link" %>
 
     <% if @owner %>
-      <%= link_to 'Удалить', event_path(@event), class: 'delete-link',
+      <%= link_to 'Удалить', event_path(@event), class: 'title-link delete-link',
                   method: :delete,
                   data: { confirm: 'Вы уверены, что хотите удалить такое мероприятие?' }
       %>

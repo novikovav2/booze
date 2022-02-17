@@ -1,0 +1,64 @@
+@media  screen and (max-width: 1007px) {
+  .fields {
+    &-row {
+     font-size: 16px;
+    }
+  }
+
+  .form {
+    &-label {
+      font-size: 16px;
+    }
+
+    &-button {
+      font-size: 16px;
+      padding: 6px 18px;
+    }
+  }
+
+  .result {
+    &-link {
+      font-size: 14px;
+    }
+  }
+
+  .event {
+    &-fieldname {
+      font-size: 16px;
+    }
+
+    &-fieldvalue {
+      font-size: 16px;
+    }
+
+    &-right {
+      margin-top: 16px;
+    }
+  }
+
+  .products {
+    &-form {
+      &-submit {
+        font-size: 14px;
+      }
+    }
+
+    &-table {
+      &_header {
+        font-size: 14px;
+      }
+
+      &_body {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .members {
+    font-size: 14px;
+  }
+
+  .join {
+    font-size: 14px;
+  }
+}
