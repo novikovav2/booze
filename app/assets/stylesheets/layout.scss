@@ -24,6 +24,10 @@
     color: $brandColor;
   }
 
+  &-menu {
+    display: block;
+  }
+
   &-text {
     margin-right: 16px;
     font-size: 18px;
@@ -131,3 +135,4 @@
 }
 
 @import 'medium/layout';
+@import "small/layout";

@@ -1,0 +1,129 @@
+@media screen and (max-width: 597px) {
+  * {
+    box-sizing: border-box;
+  }
+
+  .events {
+    &-title {
+      margin-top: 24px;
+    }
+
+    &-row {
+      padding: 8px;
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
+
+  .fields-descr {
+    flex: 1;
+  }
+
+  .form {
+    &-control {
+      margin-top: 14px;
+    }
+
+    &-label {
+      font-size: 14px;
+    }
+
+    &-input {
+      margin-left: 12px;
+      flex-basis: 500px;
+    }
+
+    &-buttons {
+      margin-top: 18px;
+    }
+
+    &-button {
+      font-size: 12px;
+      padding: 4px 12px;
+    }
+  }
+
+  .event {
+    &-left {
+      width: calc(100vw - 24px);
+    }
+
+    &-header {
+      flex-direction: column;
+    }
+
+    &-fieldvalue {
+      margin-bottom: 8px;
+      margin-left: 0;
+    }
+
+    &-reason > &-fieldvalue {
+      margin-left: 12px;
+    }
+
+    &-body {
+      margin-top: 24px;
+    }
+  }
+
+  .result {
+    &-link {
+      order: 3;
+      width: 126px;
+    }
+  }
+
+  .add-form {
+    &-container {
+      flex-direction: column;
+    }
+  }
+
+  .products {
+    &-form {
+      &-input {
+        margin-bottom: 8px;
+        padding: 6px 14px;
+      }
+
+      &_name {
+        width: 100%;
+      }
+
+      &_price {
+        width: 100%;
+      }
+
+      &_buyer {
+        width: 100%;
+      }
+
+      &-submit {
+        width: 100%;
+      }
+    }
+
+    &-table {
+      &_container {
+        width: calc(100vw - 24px);
+        overflow-x: auto;
+      }
+
+      &_header {
+        font-size: 12px;
+
+        & td {
+          padding: 0;
+        }
+      }
+
+      &_body {
+        font-size: 12px;
+
+        & td {
+          padding: 0 5px;
+        }
+      }
+    }
+  }
+}

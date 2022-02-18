@@ -5,7 +5,7 @@
     <% end %>
   </p>
 
-  <div>
+  <div class="header-menu">
     <%= link_to current_user.username, profile_path, class: 'header-text' %>
     <%= link_to 'Выход', destroy_user_session_path, method: :delete, class: 'header-text' %>
   </div>
