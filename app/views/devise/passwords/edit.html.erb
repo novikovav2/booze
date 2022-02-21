@@ -1,25 +1,50 @@
-<h2>Change your password</h2>
+<div class="auth-left">
+  <h1 class="auth-header">Смена пароля</h1>
+  <p class="auth-text">Помните пароль?</p>
+  <%= link_to "Вход", new_session_path(resource_name), class: 'auth-link' %>
+</div>
+<div class="auth-right">
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name),
+               html: { method: :put, class: 'form' }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= f.hidden_field :reset_password_token %>
+    <%= f.hidden_field :email %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+    <div class="form-control">
+      <%= f.label :password, "Новый пароль", class: 'form-label' %>
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> знаком минимум)</em><br />
+      <% end %>
+      <%= f.password_field :password, autofocus: true,
+                           autocomplete: "new-password",
+                           class: 'form-input',
+                           required: true,
+                           minLength: 6
+      %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
+    <div class="form-control">
+      <%= f.label :password_confirmation, "Подтвердите пароль", class: 'form-label' %>
+      <%= f.password_field :password_confirmation,
+                           autocomplete: "new-password",
+                           class: 'form-input',
+                           required: true,
+                           minLength: 6
+      %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <p class="form-error" id="confirm-message">
+      Пароли не совпадают
+    </p>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+    <div class="actions">
+      <%= f.submit "Поменять пароль", class: 'form-button', disabled: true,
+                   id: 'submitBtn'
+      %>
+    </div>
 
-<%= render "devise/shared/links" %>
+  <% end %>
+
+</div>
+
+<%= javascript_pack_tag 'devise/registration' %>

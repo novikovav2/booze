@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'profile/update'
   resources :events
 
-  devise_for :users
+  devise_for :users, exclude_routes: %w[edit_user_registration]
 
   root to: 'events#index'
 
