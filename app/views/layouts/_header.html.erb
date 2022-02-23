@@ -5,9 +5,19 @@
     <% end %>
   </p>
 
-  <div class="header-menu">
+  <a href="#" class="header-menu-show" id='header-menu-show'>
+    <i class="fa-solid fa-bars"></i>
+  </a>
+
+  <nav class="header-menu" id="header-menu">
+    <a href="#" class="header-menu-close" id="header-menu-close">
+      <i class="fa-solid fa-xmark"></i>
+    </a>
     <%= link_to current_user.username, profile_path, class: 'header-text' %>
     <%= link_to 'Выход', destroy_user_session_path, method: :delete, class: 'header-text' %>
-  </div>
+  </nav>
 
 </header>
+
+
+<%= javascript_pack_tag 'header' %>
