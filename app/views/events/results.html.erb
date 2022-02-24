@@ -5,8 +5,6 @@
 <div class="title-container with-bottom-border">
   <h1 class="title"><%= @event.name %> (итоги)</h1>
 </div>
-<% debugs = [] %>
-<% debugs << @results %>
 <% cols = []
    rows = []
   @results.each do |result|
@@ -32,8 +30,6 @@
     <% end %>
   </tr>
 
-  <% debugs << {rows: rows} %>
-  <% debugs << {cols: cols} %>
   <% rows.each do |row| %>
     <% debug = {} %>
     <% current_debt = row['debt'] - row['spent'] %>
@@ -42,12 +38,6 @@
         <%= row['user'].username %>
       </td>
       <% cols.each do |col| %>
-        <% debug = {
-          from: row['user'].username,
-          to: col['user'].username,
-          start_debt: current_debt,
-          start_need_money: col['need_money']
-        } %>
         <td>
           <% if current_debt == 0 %>
             0
@@ -63,13 +53,10 @@
             <% col['need_money'] = 0 %>
           <% end %>
         </td>
-        <% debug['end_debt'] = current_debt %>
-        <% debug['end_need_money'] = col['need_money'] %>
-        <% debugs << debug %>
       <% end %>
     </tr>
   <% end %>
 </table>
 </div>
 
-<%= debugs %>
+<%= @debugs %>

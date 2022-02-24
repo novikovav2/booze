@@ -94,6 +94,7 @@ class EventsController < ApplicationController
     @members = []
     @members << @event.user
     @members = @members + @event.members
+    @debug = @members
 
     @results = []
     @members.each do |member|
