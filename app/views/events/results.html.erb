@@ -5,7 +5,8 @@
 <div class="title-container with-bottom-border">
   <h1 class="title"><%= @event.name %> (итоги)</h1>
 </div>
-
+<% debugs = [] %>
+<% debugs << @results %>
 <% cols = []
    rows = []
   @results.each do |result|
@@ -30,7 +31,7 @@
       <td><%= col['user'].username %></td>
     <% end %>
   </tr>
-  <% debugs = [] %>
+
   <% debugs << {rows: rows} %>
   <% debugs << {cols: cols} %>
   <% rows.each do |row| %>
