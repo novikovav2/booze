@@ -31,6 +31,8 @@
     <% end %>
   </tr>
   <% debugs = [] %>
+  <% debugs << {rows: rows} %>
+  <% debugs << {cols: cols} %>
   <% rows.each do |row| %>
     <% debug = {} %>
     <% current_debt = row['debt'] - row['spent'] %>
