@@ -76,7 +76,7 @@ class EventsController < ApplicationController
   def join
     @event = Event.where(join_id: params[:id])[0]
     if @event
-      exist_user = @event.members.find(current_user.id)
+      exist_user = @event.members.find_by_id(current_user.id) || @event.user == current_user
       if exist_user
         redirect_to event_path(@event), notice: 'Вы уже являетесь участником веселья! ;)'
       else
