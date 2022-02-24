@@ -76,8 +76,13 @@ class EventsController < ApplicationController
   def join
     @event = Event.where(join_id: params[:id])[0]
     if @event
-      @event.members.push(current_user)
-      redirect_to event_path(@event), notice: 'Вы стали участником веселья! ;)'
+      exist_user = @event.members.find(current_user.id)
+      if exist_user
+        redirect_to event_path(@event), notice: 'Вы уже являетесь участником веселья! ;)'
+      else
+        @event.members.push(current_user)
+        redirect_to event_path(@event), notice: 'Вы стали участником веселья! ;)'
+      end
     else
       redirect_to root_path, alert: 'Такого мероприятия не найдено ;('
     end
@@ -94,7 +99,6 @@ class EventsController < ApplicationController
     @members = []
     @members << @event.user
     @members = @members + @event.members
-    @debug = @members
 
     @results = []
     @members.each do |member|
