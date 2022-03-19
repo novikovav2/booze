@@ -127,3 +127,12 @@
     }
   }
 }
+
+.remove-link {
+  margin-left: 16px;
+  color: $light;
+
+  &:hover {
+    color: darkred;
+  }
+}

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get '/join/:id', to: 'events#join', as: 'join'
   get '/leave/:id', to: 'events#leave', as: 'leave'
+  delete '/leave/:id/:user_id', to: 'events#remove_member', as: 'remove_member'
 
   put 'products/:id/eaters', to: 'products#add_eater', as: 'add_eater'
   delete 'products/:id/eaters', to: 'products#delete_eater', as: 'delete_eater'

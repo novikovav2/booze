@@ -17,8 +17,8 @@ class User < ApplicationRecord
   validates :password, length: { in: 6..20 }
 
   def username
-    profile =self.profile
+    profile = self.profile
 
-    return profile && (profile.name || profile.surname) ? profile.name + ' ' + profile.surname : self.email
+    profile && (profile.name || profile.surname) ? profile.name + ' ' + profile.surname : email
   end
 end

@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[show edit update destroy leave results]
+  before_action :set_event, only: %i[show edit update destroy leave remove_member results]
   before_action :authenticate_user!
   before_action :only_members, only: %i[show edit update destroy leave results]
 
@@ -21,7 +21,6 @@ class EventsController < ApplicationController
     # redirect_to root_path if !@members.include?(current_user)
 
     @owner = @event.user == current_user
-
   end
 
   # GET /events/new
@@ -30,14 +29,13 @@ class EventsController < ApplicationController
   end
 
   # GET /events/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /events or /events.json
   def create
     # @event = Event.new(event_params)
     @event = current_user.events.new(event_params)
-    @event.join_id = (0...8).map { (65 + rand(26)).chr }.join
+    @event.join_id = (0...8).map { rand(65..90).chr }.join
 
     respond_to do |format|
       if @event.save
@@ -71,7 +69,7 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   # GET /join/:id
   def join
     @event = Event.where(join_id: params[:id])[0]
@@ -94,11 +92,36 @@ class EventsController < ApplicationController
     redirect_to root_path, notice: 'Вы покинули встречу'
   end
 
+  # DELETE /leave/:event_id/:user_id
+  def remove_member
+    # Check if current_user is author of event
+    if @event.user == current_user
+      user = User.find_by_id(params[:user_id])
+      # Check if user exist
+      if user
+        is_member = @event.members.include?(user)
+        # Check if user is member of event
+        if is_member
+          # Check if user bought products
+          has_products = @event.products.where({buyer_id: user.id}).length
+          if has_products > 0
+            redirect_to event_path(@event), alert: 'Участник скидывался на покупки. Его нельзя просто так удалить'
+          else
+            @event.members.destroy(user)
+            redirect_to event_path(@event), notice: 'Участник удален'
+          end
+
+        end
+      end
+    end
+    #redirect_to event_path(@event), alert: 'Ууупс, что-то пошло не так'
+  end
+
   # GET /events/:id/results
   def results
     @members = []
     @members << @event.user
-    @members = @members + @event.members
+    @members += @event.members
 
     @results = []
     @members.each do |member|
@@ -108,28 +131,27 @@ class EventsController < ApplicationController
       # debt - сколько остался должен после того, как съел продукты
       result = {}
       result['user'] = member
-      result['spent'] = @event.products.where({buyer_id: member.id}).sum(:price)
+      result['spent'] = @event.products.where({ buyer_id: member.id }).sum(:price)
 
       debt = 0
       @event.products.each do |product|
         count = 0
-        if Eater.where({product_id: product.id, user_id: member.id}).length > 0
+        if Eater.where({ product_id: product.id, user_id: member.id }).length > 0
           # Убеждаемся, что пользователь вообще ел данный продукт
 
           if product.total
             # Если продукт исчисляемый
-            count = Eater.where({product_id: product.id}).length
-            part_user = Eater.where({product_id: product.id, user_id: member.id}).length
+            count = Eater.where({ product_id: product.id }).length
+            part_user = Eater.where({ product_id: product.id, user_id: member.id }).length
             debt += (product.price * part_user) / count
           else
             # Если продукт неисчисляемый
 
             # считаем сколько всего человек ело данный продукт
-            count = Eater.where({product_id: product.id}).select(:user_id).distinct.length
+            count = Eater.where({ product_id: product.id }).select(:user_id).distinct.length
             debt += product.price / count
           end
         end
-
       end
       result['debt'] = debt
 
@@ -138,20 +160,21 @@ class EventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def event_params
-      params.fetch(:event, {}).permit(:name, :description, :evented_at)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find_by_id(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def event_params
+    params.fetch(:event, {}).permit(:name, :description, :evented_at)
+  end
 
   def only_members
     members = []
     members << @event.user
-    members = members + @event.members
+    members += @event.members
     # Если пользователь не участник встречи - перенаправляем на главную,
     # чтобы не видел результаты
     redirect_to root_path unless members.include?(current_user)

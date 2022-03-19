@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
 
   # DELETE /products/:id
   def destroy
-    Eater.where({product_id: @product.id}).destroy_all
+    Eater.where({ product_id: @product.id }).destroy_all
     @product.destroy
     @products = @event.products
     respond_to do |format|
@@ -25,7 +25,7 @@ class ProductsController < ApplicationController
       format.js { render template: '/products/show_table' }
     end
   end
-  
+
   # PUT /products/:id/eaters
   def add_eater
     # @product.eaters.push(current_user)
@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
   # DELETE /products/:id/eaters
   def delete_eater
     # @product.eaters.delete(current_user)
-    Eater.where({product_id: @product.id, user_id: current_user.id}).destroy_all
+    Eater.where({ product_id: @product.id, user_id: current_user.id }).destroy_all
     @products = @event.products
     respond_to do |format|
       format.js { render template: '/products/show_table' }
@@ -60,11 +60,12 @@ class ProductsController < ApplicationController
   end
 
   private
+
   def set_product
     @product = Product.find(params[:id])
     @event = @product.event
   end
-  
+
   def product_params
     params.fetch(:product, {}).permit(:name, :price, :buyer_id, :total, :event_id)
   end

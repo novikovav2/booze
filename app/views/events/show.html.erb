@@ -67,6 +67,11 @@
 
               <% if member == @event.user %>
                 (Организатор)
+              <% else %>
+                <% if current_user == @event.user %>
+                  <%= link_to 'удалить', remove_member_path(@event, member.id),
+                            method: :delete, class: 'remove-link' %>
+                <% end %>
               <% end %>
 
             </li>

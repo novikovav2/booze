@@ -1,4 +1,4 @@
-require "active_support/core_ext/integer/time"
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -78,5 +78,4 @@ Rails.application.configure do
     host: ENV['HOST_URL'],
     port: ENV['HOST_PORT']
   }
-
 end
