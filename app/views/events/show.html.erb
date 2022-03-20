@@ -77,6 +77,22 @@
             </li>
           <% end %>
         </ul>
+        <%= form_with(model: @bot, url: add_bot_path, html: {class: 'add-bot'}) do |form| %>
+          <div class="add-bot-header">
+            Добавьте участника-бота
+          </div>
+          <p class="add-bot-subheader">
+            (заглушка, вместо живого человека):
+          </p>
+          <div class="add-bot-container">
+            <%= form.text_field :username, required: true,
+                                placeholder: 'Имя бота',
+                                class: 'add-bot-input'
+            %>
+
+            <%= form.submit 'Добавить', class: 'add-bot-submit' %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

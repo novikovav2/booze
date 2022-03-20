@@ -11,6 +11,7 @@ class EventsController < ApplicationController
 
   # GET /events/1 or /events/1.json
   def show
+    @bot = User.new
     @product = Product.new
     @products = @event.products
 
@@ -108,6 +109,10 @@ class EventsController < ApplicationController
             redirect_to event_path(@event), alert: 'Участник скидывался на покупки. Его нельзя просто так удалить'
           else
             @event.members.destroy(user)
+            if user.isBot
+              user.profile.destroy
+              user.destroy
+            end
             redirect_to event_path(@event), notice: 'Участник удален'
           end
 

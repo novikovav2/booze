@@ -24,5 +24,7 @@ Rails.application.routes.draw do
 
   get '/events/:id/results', to: 'events#results', as: 'event_results'
 
+  post '/bots/:id', to: 'members#add_bot', as: 'add_bot'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

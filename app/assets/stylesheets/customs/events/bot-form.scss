@@ -1,0 +1,36 @@
+.add-bot {
+  width: 100%;
+  border-top: 1px solid $dark;
+  margin-top: 24px;
+
+  &-header {
+    margin-top: 8px;
+    font-weight: bolder;
+  }
+
+  &-subheader {
+    margin: 4px 0 8px 0;
+  }
+
+  &-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-input {
+    width: 70%;
+    padding: 4px 6px;
+  }
+
+  &-submit {
+    border: 1px solid $dark;
+    background-color: $dark;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #FFFFFF;
+    padding: 4px 8px;
+  }
+}
