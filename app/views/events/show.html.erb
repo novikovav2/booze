@@ -3,7 +3,12 @@
 <% end %>
 
 <div class="title-container with-bottom-border">
-  <h1 class="title"><%= @event.name %></h1>
+  <h1 class="title">
+    <%= @event.name %>
+    <% if @event.archived? %>
+      (архив)
+    <% end %>
+  </h1>
   <div class="title-rightblock">
     <%= link_to 'Изменить', edit_event_path(@event), class: "title-link" %>
 

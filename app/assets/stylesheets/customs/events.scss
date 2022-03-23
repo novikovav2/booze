@@ -374,6 +374,10 @@
   visibility: visible;
 }
 
+.archived {
+  display: none;
+}
+
 @import "events/products-form";
 @import "events/bot-form";
 @import "medium/events";

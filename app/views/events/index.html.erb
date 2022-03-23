@@ -1,8 +1,34 @@
 <div class="container">
   <%= link_to 'Добавить мероприятие', new_event_path, class: "button brand-color" %>
   <h1 class="title events-title">Мероприятия:</h1>
-  <div>
-    <% @events.each do |event| %>
+
+  <a href="#" id="set-active">
+    Активные
+  </a>
+  <a href="#" id="set-archive">
+    Архив
+  </a>
+
+  <div id="active">
+    <% @active_events.each do |event| %>
+      <div class="events-row">
+        <div class="fields-name">
+          <%= link_to event.name, event %>
+        </div>
+
+        <div class="fields-descr">
+          <%= event.description %>
+        </div>
+
+        <div class="fields-date">
+          <%= I18n.l(event.evented_at.to_time, :format => '%e %B %Y') if event.evented_at %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="archive" class="archived">
+    <% @archived_events.each do |event| %>
       <div class="events-row">
         <div class="fields-name">
           <%= link_to event.name, event %>
@@ -20,26 +46,6 @@
   </div>
 </div>
 
-
-
-<!--<table>-->
-<!--  <thead>-->
-<!--    <tr>-->
-<!--      <th colspan="3"></th>-->
-<!--    </tr>-->
-<!--  </thead>-->
-
-<!--  <tbody>-->
-    <%# @events.each do |event| %>
-<!--      <tr>-->
-<!--        <td><%#= link_to 'Show', event %></td>-->
-<!--        <td><%#= link_to 'Edit', edit_event_path(event) %></td>-->
-<!--        <td><%#= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-<!--      </tr>-->
-    <%# end %>
-<!--  </tbody>-->
-<!--</table>-->
-
-<!--<br>-->
+<%= javascript_pack_tag 'events/index-tabs' %>
 
 

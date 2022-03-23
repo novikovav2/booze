@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[show edit update destroy results]
+  before_action :set_event, only: %i[show edit update destroy results change_status]
   before_action :authenticate_user!
   before_action :only_members, only: %i[show edit update destroy results]
 
@@ -7,6 +7,10 @@ class EventsController < ApplicationController
   def index
     @events = []
     @events = (current_user.events.to_a + current_user.member_of.to_a).uniq
+
+    @active_events = (current_user.events.active.to_a + current_user.member_of.active.to_a).uniq
+    @archived_events = (current_user.events.archived.to_a + current_user.member_of.archived.to_a).uniq
+
   end
 
   # GET /events/1 or /events/1.json
@@ -108,6 +112,16 @@ class EventsController < ApplicationController
       result['debt'] = debt
 
       @results << result
+    end
+  end
+
+  # POST /events/:id/change_status
+  def change_status
+    if @event.user == current_user
+      @event.active? ? @event.archived! : @event.active!
+      redirect_to events_path, notice: 'Статус мероприятия изменен'
+    else
+      redirect_to event_path(@event), alert: 'Вы не организатор этого мероприятия'
     end
   end
 

@@ -57,4 +57,15 @@
     </tr>
   <% end %>
 </table>
+
+  <% if @event.user == current_user %>
+    <%= link_to  change_status_path, method: :post do %>
+      <% if @event.active? %>
+        Отправить мероприятие в архив
+      <% else %>
+        Сделать мероприятие опять активным
+      <% end %>
+    <% end %>
+  <% end %>
+
 </div>

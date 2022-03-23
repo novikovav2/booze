@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   belongs_to :user
   has_many :products, dependent: :delete_all
   has_and_belongs_to_many :members, class_name: 'User'
+  enum status: { active: 0, archived: 1 }
 
   validates :name, presence: true
   validates :join_id, uniqueness: true
