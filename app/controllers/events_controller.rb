@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[show edit update destroy leave remove_member results]
+  before_action :set_event, only: %i[show edit update destroy results]
   before_action :authenticate_user!
-  before_action :only_members, only: %i[show edit update destroy leave results]
+  before_action :only_members, only: %i[show edit update destroy results]
 
   # GET /events or /events.json
   def index
@@ -18,8 +18,6 @@ class EventsController < ApplicationController
     @members = []
     @members << @event.user
     @members = (@members + @event.members.to_a).uniq
-
-    # redirect_to root_path if !@members.include?(current_user)
 
     @owner = @event.user == current_user
   end
@@ -69,57 +67,6 @@ class EventsController < ApplicationController
       format.html { redirect_to events_url, notice: 'Событие было успешно удалено' }
       format.json { head :no_content }
     end
-  end
-
-  # GET /join/:id
-  def join
-    @event = Event.where(join_id: params[:id])[0]
-    if @event
-      exist_user = @event.members.find_by_id(current_user.id) || @event.user == current_user
-      if exist_user
-        redirect_to event_path(@event), notice: 'Вы уже являетесь участником веселья! ;)'
-      else
-        @event.members.push(current_user)
-        redirect_to event_path(@event), notice: 'Вы стали участником веселья! ;)'
-      end
-    else
-      redirect_to root_path, alert: 'Такого мероприятия не найдено ;('
-    end
-  end
-
-  # GET /leave/:id
-  def leave
-    @event.members.destroy(current_user)
-    redirect_to root_path, notice: 'Вы покинули встречу'
-  end
-
-  # DELETE /leave/:event_id/:user_id
-  def remove_member
-    # Check if current_user is author of event
-    if @event.user == current_user
-      user = User.find_by_id(params[:user_id])
-      # Check if user exist
-      if user
-        is_member = @event.members.include?(user)
-        # Check if user is member of event
-        if is_member
-          # Check if user bought products
-          has_products = @event.products.where({buyer_id: user.id}).length
-          if has_products > 0
-            redirect_to event_path(@event), alert: 'Участник скидывался на покупки. Его нельзя просто так удалить'
-          else
-            @event.members.destroy(user)
-            if user.isBot
-              user.profile.destroy
-              user.destroy
-            end
-            redirect_to event_path(@event), notice: 'Участник удален'
-          end
-
-        end
-      end
-    end
-    #redirect_to event_path(@event), alert: 'Ууупс, что-то пошло не так'
   end
 
   # GET /events/:id/results
