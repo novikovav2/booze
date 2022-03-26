@@ -1,0 +1,45 @@
+.product {
+  &-container {
+    margin-top: 24px;
+  }
+
+  &-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  &-label {
+    width: 100px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: $dark;
+  }
+
+  &-value {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #000000;
+    margin-left: 21px;
+  }
+
+  &-input {
+    border: none;
+    padding: 4px 6px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #000000;
+    width: 500px;
+
+    &_error {
+      border: 2px solid #B00100;
+    }
+  }
+
+}

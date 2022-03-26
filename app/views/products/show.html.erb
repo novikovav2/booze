@@ -1,0 +1,56 @@
+<%= link_to event_path(@event), class: 'back-link' do %>
+  <i class="fa-regular fa-circle-left"></i> Назад
+<% end %>
+
+<div class="title-container with-bottom-border">
+  <h1 class="title">
+    Информация о продукте
+  </h1>
+  <div class="title-rightblock">
+      <%= link_to 'Удалить', product_path(@product), class: 'title-link delete-link',
+                  method: :delete
+      %>
+  </div>
+</div>
+
+<div class="product-container">
+  <%= hidden_field_tag 'id', @product.id %>
+
+  <div class="product-row">
+    <p class="product-label">
+      Название:
+    </p>
+    <div class="product-value">
+      <%= text_field_tag 'name', @product.name, class: 'product-input', required: true %>
+    </div>
+  </div>
+
+  <div class="product-row">
+    <p class="product-label">
+      Цена:
+    </p>
+    <div class="product-value">
+      <%= number_field_tag 'price', @product.price, class: 'product-input' %>
+    </div>
+  </div>
+
+  <div class="product-row">
+    <p class="product-label">
+      Количество:
+    </p>
+    <div class="product-value">
+      <%= number_field_tag 'total', @product.total, class: 'product-input' %>
+    </div>
+  </div>
+
+  <div class="product-row">
+    <p class="product-label">
+      Покупатель:
+    </p>
+    <div class="product-value">
+      <%= text_field_tag 'buyer', @product.buyer.username, class: 'product-input' %>
+    </div>
+  </div>
+</div>
+
+<%= javascript_pack_tag 'products/show' %>

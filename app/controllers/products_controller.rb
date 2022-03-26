@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_product, only: %i[destroy add_eater delete_eater]
+  before_action :set_product, only: %i[destroy add_eater delete_eater show update]
+  skip_before_action :verify_authenticity_token, only: %i[update]
 
   def create
     @product = Product.new(product_params)
@@ -21,6 +22,7 @@ class ProductsController < ApplicationController
     @product.destroy
     @products = @event.products
     respond_to do |format|
+      format.html { redirect_to event_path(@event), notice: 'Продукт удален' }
       format.json { head :no_content }
       format.js { render template: '/products/show_table' }
     end
@@ -49,20 +51,43 @@ class ProductsController < ApplicationController
 
   # POST /products/complete
   # Params: id - event_id
-  def addition_complete
-    @event = Event.find(params[:id])
-    @event.products_complete = !@event.products_complete
-    @event.save
-    @products = @event.products
+  # def addition_complete
+  #   @event = Event.find(params[:id])
+  #   @event.products_complete = !@event.products_complete
+  #   @event.save
+  #   @products = @event.products
+  #   respond_to do |format|
+  #     format.js { render template: '/products/show_table' }
+  #   end
+  # end
+
+  # GET /products/:id
+  def show
+    @eaters = User.joins('INNER JOIN eaters ON users.id = eaters.user_id')
+                  .where(eaters: {product_id: @product.id}).to_a
+
+    members = []
+    members << @event.user
+    members = (members + @event.members.to_a).uniq
+
+    @non_eater = members.difference(@eaters)     # Array of event members and not product eaters
+  end
+
+  # PATCH/PUT /products/1 or /products/1.json
+  def update
     respond_to do |format|
-      format.js { render template: '/products/show_table' }
+      if @product.update(product_params)
+        format.json { render json: @product, status: :ok }
+      else
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   private
 
   def set_product
-    @product = Product.find(params[:id])
+    @product = Product.find_by_id(params[:id])
     @event = @product.event
   end
 

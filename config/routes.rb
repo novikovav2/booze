@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   root to: 'events#index'
 
-  resources :products, only: %i[create destroy]
+  resources :products, only: %i[create destroy show update]
 
   get '/join/:id', to: 'members#join', as: 'join'
   get '/leave/:id', to: 'members#leave', as: 'leave'
@@ -15,8 +15,7 @@ Rails.application.routes.draw do
 
   put 'products/:id/eaters', to: 'products#add_eater', as: 'add_eater'
   delete 'products/:id/eaters', to: 'products#delete_eater', as: 'delete_eater'
-
-  post '/products/complete', to: 'products#addition_complete', as: 'products_complete'
+  # post '/products/complete', to: 'products#addition_complete', as: 'products_complete'
 
   get '/profile', to: 'profile#index', as: 'profile'
   post '/profile', to: 'profile#new'

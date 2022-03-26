@@ -24,7 +24,9 @@
           <i class="fa-solid fa-trash-can"></i>
         <% end %>
       </td>
-      <td><%= product.name %></td>
+      <td>
+        <%= link_to product.name, product_path(product) %>
+      </td>
       <td><%= product.price %></td>
       <td>
         <% if product.total %>
