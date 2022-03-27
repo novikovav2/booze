@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_product, only: %i[destroy add_eater delete_eater show update]
-  skip_before_action :verify_authenticity_token, only: %i[update]
+  before_action :set_product, only: %i[destroy add_eater delete_eater show update eaters update_eaters]
 
   def create
     @product = Product.new(product_params)
@@ -63,14 +62,7 @@ class ProductsController < ApplicationController
 
   # GET /products/:id
   def show
-    @eaters = User.joins('INNER JOIN eaters ON users.id = eaters.user_id')
-                  .where(eaters: {product_id: @product.id}).to_a
 
-    members = []
-    members << @event.user
-    members = (members + @event.members.to_a).uniq
-
-    @non_eater = members.difference(@eaters)     # Array of event members and not product eaters
   end
 
   # PATCH/PUT /products/1 or /products/1.json
@@ -81,6 +73,34 @@ class ProductsController < ApplicationController
       else
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # GET /products/:id/eaters
+  def eaters
+    @eaters = User.joins('INNER JOIN eaters ON users.id = eaters.user_id')
+                  .where(eaters: {product_id: @product.id}).to_a.uniq
+
+    members = []
+    members << @event.user
+    members = (members + @event.members.to_a).uniq
+
+    @non_eaters = members.difference(@eaters)     # Array of event members and not product eaters
+
+    respond_to do |format|
+      format.json { render status: :ok}
+    end
+  end
+
+  # POST /products/:id/eaters
+  def update_eaters
+    eaters = params[:eaters]
+    Eater.where({ product_id: @product.id }).destroy_all
+    eaters.each do |eater|
+      Eater.create(product_id: @product.id, user_id: eater[:id])
+    end
+    respond_to do |format|
+      format.json { render json: { success: true }, status: :ok }
     end
   end
 

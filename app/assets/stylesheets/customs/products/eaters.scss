@@ -1,0 +1,56 @@
+.eaters {
+  &-container {
+    display: flex;
+  }
+
+  &-list {
+    width: 300px;
+
+    &_title {
+      text-align: center;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    &_body {
+      border: 1px solid $dark;
+      border-radius: 8px;
+      padding: 12px 16px;
+      height: 400px;
+    }
+
+    &_item {
+      padding: 6px 0;
+      margin-bottom: 2px;
+      width: 100%;
+      color: black;
+      background: #FFFFFF;
+    }
+  }
+
+  &-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-button {
+    border: 1px solid $dark;
+    padding: 4px;
+    text-align: center;
+    width: 24px;
+    margin-top: 16px;
+
+    &:hover {
+      box-shadow: 0 0 4px $brandColor;
+    }
+  }
+
+  &-selected {
+    //background: #5a679d;
+    background: $brandColor;
+    color: #FFFFFF;
+  }
+}

@@ -82,7 +82,7 @@ class EventsController < ApplicationController
     @results = []
     @members.each do |member|
       # Это объект с полями:
-      # user - объект User
+      # user - объект ListItem
       # spent - сколько потратил покупая продукты
       # debt - сколько остался должен после того, как съел продукты
       result = {}

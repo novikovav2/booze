@@ -42,12 +42,14 @@ totalInput.addEventListener('change', async (e) => {
 })
 
 const sendData = async (data = {}) => {
+    const token = document.querySelector('[name=csrf-token]').content
     let result = true
     try {
         const response = await fetch(url, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': token
             },
             body: JSON.stringify(data)
         })

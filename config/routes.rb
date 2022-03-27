@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   root to: 'events#index'
 
   resources :products, only: %i[create destroy show update]
+  get '/products/:id/eaters', to: 'products#eaters'
+  post '/products/:id/eaters', to: 'products#update_eaters'
 
   get '/join/:id', to: 'members#join', as: 'join'
   get '/leave/:id', to: 'members#leave', as: 'leave'
