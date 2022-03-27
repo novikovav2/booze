@@ -2,14 +2,14 @@
   <%= link_to 'Добавить мероприятие', new_event_path, class: "button brand-color" %>
   <h1 class="title events-title">Мероприятия:</h1>
 
-  <a href="#" id="set-active">
+  <a href="#" id="set-active" class="status-links status-links_active">
     Активные
   </a>
-  <a href="#" id="set-archive">
+  <a href="#" id="set-archive" class="status-links">
     Архив
   </a>
 
-  <div id="active">
+  <div id="active" class="status-links_body">
     <% @active_events.each do |event| %>
       <div class="events-row">
         <div class="fields-name">
@@ -27,7 +27,7 @@
     <% end %>
   </div>
 
-  <div id="archive" class="archived">
+  <div id="archive" class="status-links_body archived">
     <% @archived_events.each do |event| %>
       <div class="events-row">
         <div class="fields-name">

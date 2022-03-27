@@ -1,0 +1,25 @@
+@media screen and (max-width: 597px) {
+  .eaters {
+    &-container {
+      flex-direction: column;
+    }
+
+    &-list {
+      &_body {
+        height: auto;
+      }
+    }
+
+    &-buttons {
+      flex-direction: row;
+      width: auto;
+      justify-content: center;
+    }
+
+    &-button {
+      margin-left: 16px;
+      margin-bottom: 16px;
+      rotate: 90deg;
+    }
+  }
+}

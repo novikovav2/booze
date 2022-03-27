@@ -59,7 +59,7 @@
 </table>
 
   <% if @event.user == current_user %>
-    <%= link_to  change_status_path, method: :post do %>
+    <%= link_to  change_status_path, method: :post, class: 'result-button' do %>
       <% if @event.active? %>
         Отправить мероприятие в архив
       <% else %>
