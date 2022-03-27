@@ -10,39 +10,11 @@
   </a>
 
   <div id="active" class="status-links_body">
-    <% @active_events.each do |event| %>
-      <div class="events-row">
-        <div class="fields-name">
-          <%= link_to event.name, event %>
-        </div>
-
-        <div class="fields-descr">
-          <%= event.description %>
-        </div>
-
-        <div class="fields-date">
-          <%= I18n.l(event.evented_at.to_time, :format => '%e %B %Y') if event.evented_at %>
-        </div>
-      </div>
-    <% end %>
+    <%= render 'events/index_list', events: @active_events %>
   </div>
 
   <div id="archive" class="status-links_body archived">
-    <% @archived_events.each do |event| %>
-      <div class="events-row">
-        <div class="fields-name">
-          <%= link_to event.name, event %>
-        </div>
-
-        <div class="fields-descr">
-          <%= event.description %>
-        </div>
-
-        <div class="fields-date">
-          <%= I18n.l(event.evented_at.to_time, :format => '%e %B %Y') if event.evented_at %>
-        </div>
-      </div>
-    <% end %>
+    <%= render 'events/index_list', events: @archived_events %>
   </div>
 </div>
 
