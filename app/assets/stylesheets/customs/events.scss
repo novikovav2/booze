@@ -13,6 +13,7 @@
     line-height: 21px;
     color: #000000;
     display: flex;
+    justify-content: center;
   }
 
 }
@@ -28,6 +29,12 @@
 
   &-date {
     flex: 1;
+  }
+
+  &-no-data {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
   }
 }
 
