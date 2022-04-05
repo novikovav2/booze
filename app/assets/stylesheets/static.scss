@@ -1,0 +1,90 @@
+// Place all the styles related to the static controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  height: 80px;
+
+  &-container {
+    max-width: 1044px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  &-logo {
+    font-family: 'Raleway', 'sans-serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+    text-align: center;
+    color: #4C629B;
+    text-decoration: none;
+    margin-left: 36px;
+  }
+}
+
+.container {
+  max-width: 1044px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  height: 600px;
+  margin-top: 42px;
+  flex-wrap: wrap;
+
+  &-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &-right {
+    flex: 1;
+    background-image: asset_url("image.png");
+    background-repeat: no-repeat;
+  }
+}
+
+.text {
+  font-family: 'Roboto', 'sans-serif';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+  text-align: center;
+  color: #9E9E9E;
+  max-width: 400px;
+  margin-top: 80px;
+}
+
+.button {
+  font-family: 'Roboto', 'sans-serif';
+  padding: 8px 24px;
+  border: 1px solid #4C629B;
+  color: #FFFFFF;
+  background: #4C629B;
+  border-radius: 6px;
+  margin-top: 32px;
+  width: content-box;
+  font-family: 'Roboto', 'sans-serif';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+
+  &:hover {
+    box-shadow: 0 0 5px #4C629B;
+  }
+}

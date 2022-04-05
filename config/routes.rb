@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  get 'static/index'
   get 'profile/update'
   resources :events
 
   devise_for :users, exclude_routes: %w[edit_user_registration]
 
-  root to: 'events#index'
+  #root to: 'events#index'
+  #get '/index', to: 'static#index'
+  root to: 'static#index'
 
   resources :products, only: %i[create destroy show update]
   get '/products/:id/eaters', to: 'products#eaters'
