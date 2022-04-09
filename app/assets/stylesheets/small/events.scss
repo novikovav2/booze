@@ -5,7 +5,7 @@
 
   .events {
     &-title {
-      margin-top: 24px;
+      margin-top: 10px;
     }
 
     &-row {
@@ -76,6 +76,7 @@
   .add-form {
     &-container {
       flex-direction: column;
+      flex-wrap: nowrap;
     }
   }
 
@@ -88,14 +89,17 @@
 
       &_name {
         width: 100%;
+        flex-basis: 32px;
       }
 
       &_price {
         width: 100%;
+        flex-basis: 32px;
       }
 
       &_buyer {
         width: 100%;
+        flex-basis: 32px;
       }
 
       &-submit {
@@ -105,7 +109,6 @@
 
     &-table {
       &_container {
-        width: calc(100vw - 24px);
         overflow-x: auto;
       }
 
@@ -141,5 +144,9 @@
   &-submit {
     font-size: 14px;
     line-height: 16px;
+  }
+
+  &-input {
+    margin-bottom: 12px;
   }
 }

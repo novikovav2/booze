@@ -25,6 +25,8 @@
     line-height: 21px;
     color: #000000;
     margin-left: 21px;
+    display: flex;
+    width: 70%;
   }
 
   &-input {
@@ -35,7 +37,8 @@
     font-size: 18px;
     line-height: 21px;
     color: #000000;
-    width: 500px;
+    flex: 1 0 200px;
+    border-radius: 12px;
 
     &_error {
       border: 2px solid #B00100;

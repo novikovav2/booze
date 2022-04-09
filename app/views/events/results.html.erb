@@ -24,51 +24,54 @@
 <div class="row w-100">
   <div class="card">
     <div class="card-body">
-      <table class="table">
-        <thead>
-        <tr>
-          <th rowspan="2">Кто переводит</th>
-          <th colspan=<%= cols.length %>>
-            Кому переводят
-          </th>
-        </tr>
-
-        <tr>
-          <% cols.each do |col| %>
-            <% col['need_money'] = col['spent'] - col['debt'] %>
-            <td><%= col['user'].username %></td>
-          <% end %>
-        </tr>
-        </thead>
-        <tbody>
-        <% rows.each do |row| %>
-          <% debug = {} %>
-          <% current_debt = row['debt'] - row['spent'] %>
+      <div class="table-container">
+        <table class="table">
+          <thead>
           <tr>
-            <td>
-              <%= row['user'].username %>
-            </td>
+            <th rowspan="2">Кто переводит</th>
+            <th colspan=<%= cols.length %>>
+              Кому переводят
+            </th>
+          </tr>
+
+          <tr>
             <% cols.each do |col| %>
-              <td>
-                <% if current_debt == 0 %>
-                  0
-                <% elsif col['need_money'] == 0%>
-                  0
-                <% elsif current_debt <= col['need_money'] %>
-                  <%= number_to_currency(current_debt, unit: 'руб.', format: "%n %u") %>
-                  <% col['need_money'] = col['need_money'] - current_debt %>
-                  <% current_debt = 0 %>
-                <% else %>
-                  <%= number_to_currency(col['need_money'], unit: 'руб.', format: "%n %u") %>
-                  <% current_debt = current_debt - col['need_money'] %>
-                  <% col['need_money'] = 0 %>
-                <% end %>
-              </td>
+              <% col['need_money'] = col['spent'] - col['debt'] %>
+              <td><%= col['user'].username %></td>
             <% end %>
           </tr>
-        <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+          <% rows.each do |row| %>
+            <% debug = {} %>
+            <% current_debt = row['debt'] - row['spent'] %>
+            <tr>
+              <td>
+                <%= row['user'].username %>
+              </td>
+              <% cols.each do |col| %>
+                <td>
+                  <% if current_debt == 0 %>
+                    0
+                  <% elsif col['need_money'] == 0%>
+                    0
+                  <% elsif current_debt <= col['need_money'] %>
+                    <%= number_to_currency(current_debt, unit: 'руб.', format: "%n %u") %>
+                    <% col['need_money'] = col['need_money'] - current_debt %>
+                    <% current_debt = 0 %>
+                  <% else %>
+                    <%= number_to_currency(col['need_money'], unit: 'руб.', format: "%n %u") %>
+                    <% current_debt = current_debt - col['need_money'] %>
+                    <% col['need_money'] = 0 %>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
     </div>
     <div class="card-footer">
       <% if @event.user == current_user %>

@@ -6,6 +6,7 @@
 
 .jc-sb {
   justify-content: space-between;
+  align-items: center;
 }
 
 * {
@@ -241,6 +242,10 @@
   border-color: $gray1;
   border-collapse: collapse;
   display: table;
+
+  &-container {
+    width: 100%;
+  }
 
   &>thead {
     background-color: $gray2;
