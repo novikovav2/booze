@@ -8,6 +8,7 @@
   .form {
     &-label {
       font-size: 16px;
+      flex-basis: 120px;
     }
 
     &-button {
@@ -41,6 +42,10 @@
       &-submit {
         font-size: 14px;
       }
+
+      &-input {
+        margin-bottom: 12px;
+      }
     }
 
     &-table {
@@ -60,5 +65,11 @@
 
   .join {
     font-size: 14px;
+  }
+
+  .add-bot {
+    &-submit {
+
+    }
   }
 }

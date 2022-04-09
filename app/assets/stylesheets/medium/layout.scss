@@ -9,8 +9,12 @@
     }
   }
 
+  .container {
+    max-width: 766px;
+  }
+
   .button {
-    font-size: 14px;
+    font-size: 32px;
     padding: 8px 20px;
   }
 
@@ -25,5 +29,13 @@
 
   .delete-link {
 
+  }
+
+  .table {
+    font-size: 13px;
+  }
+
+  .footer {
+    max-width: 766px;
   }
 }
