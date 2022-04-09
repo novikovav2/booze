@@ -1,11 +1,10 @@
 .events {
   &-title {
-    margin-top: 40px;
   }
 
   &-row {
-    border-top: 1px solid $light;
-    border-bottom: 1px solid $light;
+    //border-top: 1px solid $light;
+    //border-bottom: 1px solid $light;
     padding: 13px 30px;
     font-style: normal;
     font-weight: normal;
@@ -35,6 +34,7 @@
     font-weight: normal;
     font-size: 14px;
     line-height: 16px;
+    text-align: center;
   }
 }
 
@@ -62,9 +62,14 @@
     flex-basis: 600px;
     margin-left: 36px;
     background: #FFFFFF;
-    border: 1px solid $dark;
-    border-radius: 5px;
+    border: 1px solid $gray4;
+    border-radius: 8px;
     padding: 10px;
+
+    &:focus {
+      outline: none;
+      border-color: $gray8;
+    }
   }
 
   &-buttons {
@@ -139,23 +144,26 @@
 
   &-reason {
     display: flex;
+    margin-bottom: 16px;
   }
 
   &-fieldname {
+    flex: 0 1 70px;
     font-style: normal;
     font-weight: normal;
+    font-size: 18px;
     font-size: 18px;
     line-height: 21px;
     color: $dark;
   }
 
   &-fieldvalue {
+    flex: 1 0 auto;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 21px;
     color: #000000;
-    margin-left: 21px;
   }
 }
 
@@ -172,27 +180,32 @@
     }
 
     &-input {
-      padding: 3px 13px;
+      padding: 12px 18px;
       background: #FFFFFF;
-      border: 1px solid black;
-      border-radius: 4px;
+      border: 1px solid $gray3;
+      border-radius: 8px;
       margin-right: 20px;
+      color: $gray8;
+
+      &:focus {
+        outline: none;
+        border-color: $gray8;
+      }
     }
 
     &_name {
-      width: 200px;
+      flex: 1 0 200px;
     }
 
     &_price {
-      width: 120px;
+      flex: 0 0 120px;
     }
 
     &_buyer {
-      width: 200px;
+      flex: 0 0 200px;
     }
 
     &-submit {
-      //background: $brandColor;
       border: 1px solid $brandColor;
       background-color: $dark;
       border-radius: 8px;
@@ -207,6 +220,10 @@
         box-shadow: 0 0 5px $brandColor;
       }
     }
+
+    &_text {
+      font-size: 12px;
+    }
   }
 
   &-total {
@@ -215,7 +232,6 @@
   }
 
   &-table {
-
     width: 100%;
     text-align: center;
     max-height: 600px;
@@ -226,7 +242,6 @@
       border: 1px solid $light;
       border-collapse: collapse;
     }
-
 
     &_header {
       font-style: normal;
@@ -296,7 +311,7 @@
 
 .delete-link {
   text-decoration: none;
-  color: #B00100;
+  color: $orange;
   margin-left: 24px;
 
   &:hover {
@@ -306,7 +321,8 @@
 
 .leave-link {
   text-decoration: none;
-  color: #B00100;
+  color: $orange;
+  color: $orange;
 
   &:hover {
     text-decoration: underline;
@@ -323,6 +339,7 @@
 
 .result {
   &-link {
+    margin-top: 20px;
     background: $brandColor;
     border: 2px solid $brandColor;
     border-radius: 8px;
@@ -399,15 +416,15 @@
 }
 
 .status-links {
-  border: 1px solid $light;
-  padding: 8px 12px;
+  color: $gray9;
+  margin-right: 32px;
 
   &_body {
     margin-top: 8px;
   }
 
   &_active {
-    background: #d0defa;
+    color: $orange;
   }
 }
 

@@ -1,87 +1,92 @@
-<%= link_to events_path, class: 'back-link' do %>
-  <i class="fa-regular fa-circle-left"></i> Назад
-<% end %>
+<div class="row w-100">
+  <div class="card bg-gray1">
+    <div class="row w-100 jc-sb">
+      <h1 class="title events-title">
+        <%= link_to events_path, class: 'back-link' do %>
+          <i class="fa-regular fa-circle-left"></i>
+        <% end %>
+        <%= @event.name %>
+        <% if @event.archived? %>
+          (архив)
+        <% end %>
+      </h1>
 
-<div class="title-container with-bottom-border">
-  <h1 class="title">
-    <%= @event.name %>
-    <% if @event.archived? %>
-      (архив)
-    <% end %>
-  </h1>
-  <div class="title-rightblock">
-    <%= link_to 'Изменить', edit_event_path(@event), class: "title-link" %>
+      <div class="title-rightblock">
+        <%= link_to 'Изменить', edit_event_path(@event), class: "title-link" %>
 
-    <% if @owner %>
-      <%= link_to 'Удалить', event_path(@event), class: 'title-link delete-link',
-                  method: :delete,
-                  data: { confirm: 'Вы уверены, что хотите удалить такое мероприятие?' }
-      %>
-    <% end %>
-
-  </div>
-</div>
-
-<div class="event">
-  <div class="event-header">
-    <div class="event-reason">
-      <p class="event-fieldname">Повод:</p>
-      <p class="event-fieldvalue"><%= @event.description %></p>
-    </div>
-    <%= link_to 'Подвести итоги', event_results_path(@event), class: 'result-link' %>
-    <div class="event-fieldvalue">
-      <%= I18n.l(@event.evented_at.to_time, :format => '%e %B %Y') if @event.evented_at %>
-    </div>
-  </div>
-  <div class="event-body">
-    <div class="event-left">
-      <p class="event-fieldname">Продукты</p>
-      <%= render 'events/products_form' %>
-
-      <div id="table" class="products-table_container">
-        <%= render '/products/products', products: @products %>
-      </div>
-
-    </div>
-    <div class="event-right">
-      <div class="event-right_header">
-        <p class="event-fieldname">Участники</p>
-
-        <% unless @owner %>
-        <%=  link_to 'Покинуть', leave_path(@event), class: 'leave-link',
-                      data: { confirm: 'Вы убеверны, что не хотите участвовать в этом веселье?'}  %>
+        <% if @owner %>
+          <%= link_to 'Удалить', event_path(@event), class: 'title-link delete-link',
+                      method: :delete,
+                      data: { confirm: 'Вы уверены, что хотите удалить такое мероприятие?' }
+          %>
         <% end %>
 
       </div>
+    </div>
+  </div>
+</div>
 
-
-      <div class="join">
-        <p class="join-title">Пригласить:</p>
-        <%= link_to join_url(@event.join_id), "#", class: 'join-link', id: 'join-link' %>
-
-        <div class="join-confirm" id="join-confirm">
-          Скопировано!
-        </div>
-
+<div class="row">
+  <div class="w-50">
+    <div class="card">
+      <div class="card-header">
+        Информация
       </div>
-      <div class="members">
-        <ul>
-          <% @members.each do |member| %>
-            <li class="members-item">
-              <%= member.username %>
+      <div class="card-body">
+        <div class="event-reason">
+          <p class="event-fieldname">Повод:</p>
+          <p class="event-fieldvalue"><%= @event.description %></p>
+        </div>
+        <div class="event-reason">
+          <p class="event-fieldname">Дата:</p>
+          <p class="event-fieldvalue">
+            <%= I18n.l(@event.evented_at.to_time, :format => '%e %B %Y') if @event.evented_at %>
+          </p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <%= link_to 'Подвести итоги', event_results_path(@event), class: 'result-link' %>
+      </div>
+    </div>
+  </div>
+  <div class="w-50">
+    <div class="card">
+      <div class="card-header">
+        Участники
+        <% unless @owner %>
+          <%=  link_to 'Покинуть', leave_path(@event), class: 'leave-link',
+                       data: { confirm: 'Вы убеверны, что не хотите участвовать в этом веселье?'}  %>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <div class="join">
+          <p class="join-title">Пригласить:</p>
+          <%= link_to join_url(@event.join_id), "#", class: 'join-link', id: 'join-link' %>
 
-              <% if member == @event.user %>
-                (Организатор)
-              <% else %>
-                <% if current_user == @event.user %>
-                  <%= link_to 'удалить', remove_member_path(@event, member.id),
-                            method: :delete, class: 'remove-link' %>
+          <div class="join-confirm" id="join-confirm">
+            Скопировано!
+          </div>
+        </div>
+        <div class="members">
+          <ul>
+            <% @members.each do |member| %>
+              <li class="members-item">
+                <%= member.username %>
+
+                <% if member == @event.user %>
+                  (Организатор)
+                <% else %>
+                  <% if current_user == @event.user %>
+                    <%= link_to 'удалить', remove_member_path(@event, member.id),
+                                method: :delete, class: 'remove-link' %>
+                  <% end %>
                 <% end %>
-              <% end %>
-
-            </li>
-          <% end %>
-        </ul>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="card-footer">
         <%= form_with(model: @bot, url: add_bot_path, html: {class: 'add-bot'}) do |form| %>
           <div class="add-bot-header">
             Добавьте участника-бота
@@ -103,8 +108,7 @@
   </div>
 </div>
 
-
-
+<%= render '/products/products', products: @products %>
 
 
 <%= javascript_pack_tag 'events/join' %>

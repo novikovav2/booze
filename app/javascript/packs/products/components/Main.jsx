@@ -67,7 +67,6 @@ const Main = () => {
         })
         setNonEatersList([...nonEatersList, ...selectedItems])
         setEatersList(newList)
-        console.log(eatersList === newList)
         dataChanged.current = true
     }
 

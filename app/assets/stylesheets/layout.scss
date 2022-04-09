@@ -8,12 +8,21 @@
   justify-content: space-between;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+.body {
+  background-color: $body-bg;
+}
+
 .header {
-  padding: 21px 40px;
+  height: 80px;
+  padding: 0 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
+  background-color: $brandColor;
 
   &-title {
     font-family: Raleway, sans-serif;
@@ -21,7 +30,11 @@
     font-weight: bold;
     font-size: 36px;
     line-height: 42px;
-    color: $brandColor;
+    color: $white;
+
+    &:visited {
+      color: $white;
+    }
   }
 
   &-menu {
@@ -40,7 +53,7 @@
     margin-right: 16px;
     font-size: 18px;
     line-height: 21px;
-    color: $brandColor;
+    color: $white;
 
     &:hover {
       text-decoration: underline;
@@ -50,28 +63,32 @@
 
 .back-link {
   text-decoration: none;
-  color: $dark;
+  color: $gray5;
+  margin-right: 12px;
 
   &:hover {
-    text-decoration: underline;
+    color: $gray8
   }
 }
 
 .container {
   //width: 1600px;
-  padding: 0 40px;
+  //padding: 0 40px;
   margin: 0 auto;
+  min-height: calc(100vh - 140px);
+  max-width: 1200px;
 }
 
 .button {
-  padding: 10px 30px;
-  border-radius: 24px;
-  font-size: 18px;
+  //padding: 10px 20px;
+  //border-radius: 24px;
+  font-size: 48px;
   line-height: 21px;
-  color: #FFFFFF;
+  color: $brandColor;
 
   &:hover {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    //box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: $gray6;
   }
 }
 
@@ -81,11 +98,11 @@
 
 .title {
   font-style: normal;
-  font-weight: bold;
+  //font-weight: bold;
   font-size: 24px;
   line-height: 36px;
-  color: #000000;
-  margin-bottom: 16px;
+  color: $gray9;
+
 
   &-rightblock {
     display: flex;
@@ -103,7 +120,7 @@
     font-weight: normal;
     font-size: 16px;
     line-height: 21px;
-    color: $dark;
+    color: $gray7;
 
     &:hover {
       text-decoration: underline;
@@ -143,9 +160,131 @@
 }
 
 .footer {
-  margin-top: 24px;
-  height: 100px;
+  height: 60px;
+  background-color: $body-bg;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  &-text {
+    font-size: 12px;
+    color: $gray4;
+  }
 }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.card {
+  margin-top: 24px;
+  background-color: $white;
+  border: 1px solid $gray3;
+  border-radius: 12px;
+  padding: 16px 20px;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 7px 14px 0 rgba(65,69,88,0.1),0 3px 6px 0 rgba(0,0,0,0.07);
+
+  &-header {
+    color: $gray10 !important;
+    padding-bottom: 16px;
+    border-bottom: 1px solid $gray3;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-body {
+    padding-top: 12px;
+  }
+
+  &-footer {
+    color: $gray8;
+    border-top: 1px solid $gray3;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &>* {
+    color: $gray8;
+  }
+}
+
+.bg-gray1 {
+  background-color: $gray1;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-50 {
+  flex: 1 0 300px;
+  width: 50%;
+
+  &:first-child {
+    padding-right: 10px;
+  }
+
+  &:last-child {
+    padding-left: 10px;
+  }
+}
+
+.table {
+  width: 100%;
+  border-color: $gray1;
+  border-collapse: collapse;
+  display: table;
+
+  &>thead {
+    background-color: $gray2;
+    color: $gray7;
+    text-align: center;
+  }
+
+  &>tbody>tr {
+    border-top: 1px solid $gray2;
+  }
+
+  &>tbody>tr>td {
+    text-align: center;
+    color: $gray8;
+  }
+
+  &>:not(caption)>*>* {
+    padding: 1rem;
+  }
+
+  &>tbody>tr>td:first-child {
+    padding-left: 1.25rem;
+    text-align: left;
+  }
+
+  &>tbody>tr>td:last-child {
+    text-align: right;
+  }
+}
+
+.link {
+  color: $blue;
+
+  &:visited {
+    color: $blue;
+  }
+
+  &:hover {
+    color: $brandColor;
+  }
+}
+
+
 
 @import 'medium/layout';
 @import "small/layout";

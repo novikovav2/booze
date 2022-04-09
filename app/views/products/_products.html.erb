@@ -1,75 +1,91 @@
-  <p class="products-total">
-    Общая сумма: <strong><%= @products.sum(:price) %> </strong> руб.
-  </p>
-
-<table class="products-table">
-  <thead class="products-table_header">
-  <tr>
-    <td></td>
-    <td>Продукт</td>
-    <td>Цена</td>
-    <td>К-во</td>
-    <td>Купил</td>
-    <td>Употребляло</td>
-    <td>Ты съел</td>
-    <td>Ты употреблял?</td>
-  </tr>
-  </thead>
-  <tbody class="products-table_body">
-  <% products.each do |product| %>
-    <tr>
-      <td>
-        <%= link_to product_path(product), method: :delete,
-                    class: 'trash-link', remote: true do %>
-          <i class="fa-solid fa-trash-can"></i>
-        <% end %>
-      </td>
-      <td>
-        <%= link_to product.name, product_path(product) %>
-      </td>
-      <td><%= product.price %></td>
-      <td>
-        <% if product.total %>
-          <%= product.total %>
-        <% else %>
-          -
-        <% end %>
-      </td>
-      <td><%= product.buyer.username %></td>
-      <td class="tooltip">
-        <%= Eater.where({product_id: product.id}).select(:user_id).distinct.length %> чел.
-        <div class="tooltip-text">
-          <ul>
-            <% Eater.where({product_id: product.id}).select(:user_id).distinct.each do |eater| %>
-              <li>
-                <%= User.find(eater.user_id).username %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      </td>
-      <% ate_total = Eater.where({product_id: product.id, user_id: current_user.id}).length %>
-      <td>
-        <% if product.total %>
-          <%= ate_total %> шт.
-        <% else %>
-          -
-        <% end %>
-      </td>
-      <td>
-          <% if ate_total == 0 %>
-            Нет
-            <%=  link_to ' (Да)', add_eater_path(product), method: :put, remote: true  %>
-          <% elsif product.total %>
-            <%=  link_to '+1', add_eater_path(product), method: :put, remote: true  %>
-            /
-            <%= link_to 'Нет', delete_eater_path(product), method: :delete, remote: true %>
-          <% else %>
-            Да
-            <%= link_to ' (Нет)', delete_eater_path(product), method: :delete, remote: true %>
+<div class="row w-100" id="table">
+  <div class="card">
+    <div class="card-header">
+      Продукты
+    </div>
+    <div class="card-body">
+      <%= render 'events/products_form' %>
+      <div  class="products-table_container">
+        <table class="table">
+          <thead>
+          <tr>
+            <td></td>
+            <td>Продукт</td>
+            <td>Цена</td>
+            <td>К-во</td>
+            <td>Купил</td>
+            <td>Употребляло</td>
+            <td>Ты съел</td>
+            <td>Ты употреблял?</td>
+          </tr>
+          </thead>
+          <tbody>
+          <% products.each do |product| %>
+            <tr>
+              <td>
+                <%= link_to product_path(product), method: :delete,
+                            class: 'trash-link', remote: true do %>
+                  <i class="fa-solid fa-trash-can"></i>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to product.name, product_path(product), class: 'link' %>
+              </td>
+              <td><%= product.price %></td>
+              <td>
+                <% if product.total %>
+                  <%= product.total %>
+                <% else %>
+                  -
+                <% end %>
+              </td>
+              <td><%= product.buyer.username %></td>
+              <td class="tooltip">
+                <%= Eater.where({product_id: product.id}).select(:user_id).distinct.length %> чел.
+                <div class="tooltip-text">
+                  <ul>
+                    <% Eater.where({product_id: product.id}).select(:user_id).distinct.each do |eater| %>
+                      <li>
+                        <%= User.find(eater.user_id).username %>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </td>
+              <% ate_total = Eater.where({product_id: product.id, user_id: current_user.id}).length %>
+              <td>
+                <% if product.total %>
+                  <%= ate_total %> шт.
+                <% else %>
+                  -
+                <% end %>
+              </td>
+              <td>
+                <% if ate_total == 0 %>
+                  Нет
+                  <%=  link_to ' (Изменить)', add_eater_path(product), class: 'link', method: :put, remote: true  %>
+                <% elsif product.total %>
+                  Да  <%=  link_to '(+1)', add_eater_path(product), class: 'link', method: :put, remote: true  %>
+                  /
+                  <%= link_to 'Нет', delete_eater_path(product), class: 'link', method: :delete, remote: true %>
+                <% else %>
+                  Да
+                  <%= link_to ' (Изменить)', delete_eater_path(product), class: 'link', method: :delete, remote: true %>
+                <% end %>
+              </td>
+            </tr>
           <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer">
+      <p class="products-total">
+        Общая сумма: <strong><%= @products.sum(:price) %> </strong> руб.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+

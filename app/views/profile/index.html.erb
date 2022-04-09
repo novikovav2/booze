@@ -1,52 +1,63 @@
-<%= link_to events_path, class: 'back-link' do %>
-  <i class="far fa-arrow-alt-circle-left"></i> Назад
-<% end %>
-
-<div class="title-container with-bottom-border">
-  <h1 class="title">Профиль</h1>
+<div class="row w-100">
+  <div class="card bg-gray1">
+    <div class="row w-100 jc-sb">
+      <h1 class="title events-title">
+        Профиль
+      </h1>
+    </div>
+  </div>
 </div>
 
-<%= form_with(model: @profile, url: profile_path, html: {class: 'form'}) do |form| %>
-  <div class="form-control">
-    <%= form.label :name, 'Имя:', class: 'form-label'%>
-    <%= form.text_field :name, autofocus: true, class: 'form-input' %>
+<div class="row w-100">
+  <div class="card">
+    <div class="card-body">
+      <%= form_with(model: @profile, url: profile_path, html: {class: 'form'}) do |form| %>
+        <div class="form-control">
+          <%= form.label :name, 'Имя:', class: 'form-label'%>
+          <%= form.text_field :name, autofocus: true, class: 'form-input' %>
+        </div>
+
+        <div class="form-control">
+          <%= form.label :surname, 'Фамилия:', class: 'form-label'%>
+          <%= form.text_field :surname, class: 'form-input' %>
+        </div>
+
+        <div class="form-buttons">
+          <%= form.submit 'Сохранить', class: 'form-button form-apply' %>
+        </div>
+      <% end %>
+
+      <hr class="form-delimiter"/>
+
+      <%= form_with(model: @user, url: change_password_path, html: {class: 'form'}) do |form| %>
+        <%= form.hidden_field :email, id: 'user_email' %>
+
+        <div class="form-control">
+          <%= form.label :password, 'Новый пароль:', class: 'form-label'%>
+          <%= form.password_field :password, class: 'form-input', id: 'user_password' %>
+        </div>
+
+        <div class="form-control">
+          <%= form.label :password_confirmation, 'Подтвердите пароль:', class: 'form-label'%>
+          <%= form.password_field :password_confirmation, class: 'form-input',
+                                  id: 'user_password_confirmation' %>
+          <p class="form-error" id="confirm-message">
+            Пароли не совпадают
+          </p>
+        </div>
+
+
+
+        <div class="form-buttons">
+          <%= form.submit 'Сменить пароль', class: 'form-button form-apply',
+                          id: 'submitBtn', disabled: true %>
+        </div>
+      <% end %>
+
+    </div>
   </div>
-
-  <div class="form-control">
-    <%= form.label :surname, 'Фамилия:', class: 'form-label'%>
-    <%= form.text_field :surname, class: 'form-input' %>
-  </div>
-
-  <div class="form-buttons">
-    <%= form.submit 'Сохранить', class: 'form-button form-apply' %>
-  </div>
-<% end %>
-
-<hr class="form-delimiter"/>
-
-<%= form_with(model: @user, url: change_password_path, html: {class: 'form'}) do |form| %>
-  <%= form.hidden_field :email, id: 'user_email' %>
-
-  <div class="form-control">
-    <%= form.label :password, 'Новый пароль:', class: 'form-label'%>
-    <%= form.password_field :password, class: 'form-input', id: 'user_password' %>
-  </div>
-
-  <div class="form-control">
-    <%= form.label :password_confirmation, 'Подтвердите пароль:', class: 'form-label'%>
-    <%= form.password_field :password_confirmation, class: 'form-input',
-                            id: 'user_password_confirmation' %>
-    <p class="form-error" id="confirm-message">
-      Пароли не совпадают
-    </p>
-  </div>
+</div>
 
 
-
-  <div class="form-buttons">
-    <%= form.submit 'Сменить пароль', class: 'form-button form-apply',
-                    id: 'submitBtn', disabled: true %>
-  </div>
-<% end %>
 
 <%= javascript_pack_tag 'devise/registration' %>

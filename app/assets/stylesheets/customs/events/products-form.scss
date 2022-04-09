@@ -1,11 +1,10 @@
 .add-form {
   margin-top: 16px;
-  border-bottom: 1px solid $light;
   padding-bottom: 8px;
 
   &-container {
     display: flex;
-    //justify-content: space-between;
+    flex-wrap: wrap;
     margin-bottom: 16px;
   }
 

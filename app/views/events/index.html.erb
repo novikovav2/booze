@@ -1,22 +1,39 @@
-<div class="container">
-  <%= link_to 'Добавить мероприятие', new_event_path, class: "button brand-color" %>
-  <h1 class="title events-title">Мероприятия:</h1>
+  <div class="row w-100">
+    <div class="card bg-gray1">
+      <div class="row w-100 jc-sb">
+        <h1 class="title events-title">Мероприятия</h1>
 
-  <a href="#" id="set-active" class="status-links status-links_active">
-    Активные
-  </a>
-  <a href="#" id="set-archive" class="status-links">
-    Архив
-  </a>
-
-  <div id="active" class="status-links_body">
-    <%= render 'events/index_list', events: @active_events %>
+        <%= link_to new_event_path, class: "button" do %>
+          <i class="fa-solid fa-circle-plus"></i>
+        <% end %>
+      </div>
+    </div>
   </div>
 
-  <div id="archive" class="status-links_body archived">
-    <%= render 'events/index_list', events: @archived_events %>
+
+  <div class="row w-100">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <a href="#" id="set-active" class="status-links status-links_active">
+            Активные
+          </a>
+          <a href="#" id="set-archive" class="status-links">
+            Архив
+          </a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div id="active" class="status-links_body">
+          <%= render 'events/index_list', events: @active_events %>
+        </div>
+
+        <div id="archive" class="status-links_body archived">
+          <%= render 'events/index_list', events: @archived_events %>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
 <%= javascript_pack_tag 'events/index-tabs' %>
 

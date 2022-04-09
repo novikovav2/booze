@@ -1,3 +1,14 @@
-<h1 class="title with-bottom-border">Давай поправим</h1>
+<div class="row w-100">
+  <div class="card bg-gray1">
+    <h1 class="title events-title">
+      <%= link_to event_path(@event), class: 'back-link' do %>
+        <i class="fa-regular fa-circle-left"></i>
+      <% end %>
+      Изменить мероприятие
+    </h1>
+  </div>
+</div>
+
+
 <%= render 'form', event: @event, cancel_path: event_path(@event) %>
 

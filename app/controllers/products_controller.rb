@@ -5,14 +5,20 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
 
-    respond_to do |format|
-      if @product.save
-        @products = @product.event.products
-        format.js { render template: '/products/show_table' }
-      else
-        redirect_to event_path(product_params.event_id)
-      end
+    if @product.save
+      redirect_to event_path(@product.event.id), notice: 'Продукт добавлен'
+    else
+      redirect_to event_path(@product.event.id), alert: 'Упппс, не получилось'
     end
+
+    # respond_to do |format|
+    #   if @product.save
+    #     @products = @product.event.products
+    #     format.js { render template: '/products/show_table' }
+    #   else
+    #     redirect_to event_path(product_params.event_id)
+    #   end
+    # end
   end
 
   # DELETE /products/:id
@@ -33,9 +39,11 @@ class ProductsController < ApplicationController
     Eater.create(product_id: @product.id, user_id: current_user.id)
     @products = @event.products
 
-    respond_to do |format|
-      format.js { render template: '/products/show_table' }
-    end
+    redirect_to event_path(@event)
+
+    # respond_to do |format|
+    #   format.js { render template: '/products/show_table' }
+    # end
   end
 
   # DELETE /products/:id/eaters
@@ -43,9 +51,12 @@ class ProductsController < ApplicationController
     # @product.eaters.delete(current_user)
     Eater.where({ product_id: @product.id, user_id: current_user.id }).destroy_all
     @products = @event.products
-    respond_to do |format|
-      format.js { render template: '/products/show_table' }
-    end
+
+    redirect_to event_path(@event)
+
+    # respond_to do |format|
+    #   format.js { render template: '/products/show_table' }
+    # end
   end
 
   # POST /products/complete

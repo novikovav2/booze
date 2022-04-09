@@ -1,39 +1,47 @@
-<%= form_with(model: event, html: {class: 'form'}) do |form| %>
+<div class="row w-100">
+  <div class="card">
+    <div class="card-body">
+      <%= form_with(model: event, html: {class: 'form'}) do |form| %>
 
 
-  <div class="form-control">
-    <%= form.label :name, 'Придумай название:', class: 'form-label' %>
-    <%= form.text_field :name, required: true,
-                        autofocus: true,
-                        class: 'form-input'
-    %>
-  </div>
+        <div class="form-control">
+          <%= form.label :name, 'Придумай название:', class: 'form-label' %>
+          <%= form.text_field :name, required: true,
+                              autofocus: true,
+                              class: 'form-input'
+          %>
+        </div>
 
-  <div class="form-control">
-    <%= form.label :evented_at, 'Когда пьем:', class: 'form-label' %>
-    <%= form.date_field :evented_at, value: form.object.try(:strftime,"%d/%m/%Y"), class: 'form-input' %>
-  </div>
+        <div class="form-control">
+          <%= form.label :evented_at, 'Когда пьем:', class: 'form-label' %>
+          <%= form.date_field :evented_at, value: form.object.try(:strftime,"%d/%m/%Y"), class: 'form-input' %>
+        </div>
 
-  <div class="form-control">
-    <%= form.label :description, 'Какой повод:', class: 'form-label' %>
-    <%= form.text_area :description, class: 'form-input' %>
-  </div>
+        <div class="form-control">
+          <%= form.label :description, 'Какой повод:', class: 'form-label' %>
+          <%= form.text_area :description, class: 'form-input' %>
+        </div>
 
-  <div class="form-buttons">
-    <%= form.submit 'Сохранить', class: 'form-button form-apply' %>
-    <%= link_to 'Отмена', cancel_path, class: 'form-button form-cancel' %>
-  </div>
+        <div class="form-buttons">
+          <%= form.submit 'Сохранить', class: 'form-button form-apply' %>
+          <%= link_to 'Отмена', cancel_path, class: 'form-button form-cancel' %>
+        </div>
 
 
-  <% if event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+        <% if event.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
-      <ul>
-        <% event.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+            <ul>
+              <% event.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+      <% end %>
+
     </div>
-  <% end %>
-<% end %>
+  </div>
+</div>
+

@@ -17,11 +17,11 @@
 
     <%= form.hidden_field :event_id, value: @event.id %>
 
-    <%= form.submit "Добавить", class: 'products-form-submit' %>
+    <%= form.submit "Добавить", class: 'add-bot-submit' %>
   </div>
 
   <input type="checkbox" id="countable" name="countable"/>
-  <label for="countable">Требует поштучного учета</label>
+  <label for="countable" class="products-form_text">Требует поштучного учета</label>
 
   <div class="add-form-hidden" id="hidden">
     <%= form.number_field :total, min: 0, max: 100000,

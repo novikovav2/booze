@@ -1,23 +1,36 @@
 <% if events.length > 0 %>
-  <% events.each do |event| %>
-    <div class="events-row">
-      <div class="fields-name">
-        <%= link_to event.name, event %>
-      </div>
-
-      <div class="fields-descr">
-        <%= event.description %>
-      </div>
-
-      <div class="fields-date">
-        <%= I18n.l(event.evented_at.to_time, :format => '%e %B %Y') if event.evented_at %>
-      </div>
-    </div>
-  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          Название
+        </th>
+        <th>
+          Повод
+        </th>
+        <th>
+          Дата
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% events.each do |event| %>
+        <tr>
+          <td >
+            <%= link_to event.name, event, class: 'link' %>
+          </td>
+          <td>
+            <%= event.description %>
+          </td>
+          <td>
+            <%= I18n.l(event.evented_at.to_time, :format => '%e %B %Y') if event.evented_at %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% else %>
-  <div class="events-row">
     <div class="fields-no-data">
       Событий нет
     </div>
-  </div>
 <% end %>
