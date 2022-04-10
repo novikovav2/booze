@@ -5,20 +5,16 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
 
-    if @product.save
-      redirect_to event_path(@product.event.id), notice: 'Продукт добавлен'
-    else
-      redirect_to event_path(@product.event.id), alert: 'Упппс, не получилось'
+    respond_to do |format|
+      if @product.save
+        @event = @product.event
+        prepare_for_form
+        @products = @event.products
+        format.js { render template: '/products/show_table' }
+      else
+        redirect_to event_path(product_params.event_id)
+      end
     end
-
-    # respond_to do |format|
-    #   if @product.save
-    #     @products = @product.event.products
-    #     format.js { render template: '/products/show_table' }
-    #   else
-    #     redirect_to event_path(product_params.event_id)
-    #   end
-    # end
   end
 
   # DELETE /products/:id
@@ -39,11 +35,12 @@ class ProductsController < ApplicationController
     Eater.create(product_id: @product.id, user_id: current_user.id)
     @products = @event.products
 
-    redirect_to event_path(@event)
+    # redirect_to event_path(@event)
+    prepare_for_form
 
-    # respond_to do |format|
-    #   format.js { render template: '/products/show_table' }
-    # end
+    respond_to do |format|
+      format.js { render template: '/products/show_table' }
+    end
   end
 
   # DELETE /products/:id/eaters
@@ -52,29 +49,16 @@ class ProductsController < ApplicationController
     Eater.where({ product_id: @product.id, user_id: current_user.id }).destroy_all
     @products = @event.products
 
-    redirect_to event_path(@event)
+    prepare_for_form
+    #redirect_to event_path(@event)
 
-    # respond_to do |format|
-    #   format.js { render template: '/products/show_table' }
-    # end
+    respond_to do |format|
+      format.js { render template: '/products/show_table' }
+    end
   end
-
-  # POST /products/complete
-  # Params: id - event_id
-  # def addition_complete
-  #   @event = Event.find(params[:id])
-  #   @event.products_complete = !@event.products_complete
-  #   @event.save
-  #   @products = @event.products
-  #   respond_to do |format|
-  #     format.js { render template: '/products/show_table' }
-  #   end
-  # end
 
   # GET /products/:id
-  def show
-
-  end
+  def show; end
 
   # PATCH/PUT /products/1 or /products/1.json
   def update
@@ -124,5 +108,12 @@ class ProductsController < ApplicationController
 
   def product_params
     params.fetch(:product, {}).permit(:name, :price, :buyer_id, :total, :event_id)
+  end
+
+  def prepare_for_form
+    @product = Product.new
+    @members = []
+    @members << @event.user
+    @members = (@members + @event.members.to_a).uniq
   end
 end
