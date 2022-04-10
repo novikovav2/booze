@@ -1,0 +1,13 @@
+@media screen and (max-width: 1007px) {
+    .container {
+        max-width: 740px;
+    }
+
+    .footer {
+        max-width: 740px;
+    }
+
+    .bg-image {
+        background: none;
+    }
+}

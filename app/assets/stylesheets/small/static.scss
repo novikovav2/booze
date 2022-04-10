@@ -1,0 +1,48 @@
+@media screen and (max-width: 597px) {
+  .header {
+    &-logo {
+      font-size: 28px;
+    }
+  }
+
+  .container {
+    max-width: 330px;
+  }
+
+  .footer {
+    max-width: 330px;
+  }
+
+  .row {
+    height: 460px;
+
+    &-left {
+      flex-basis: 330px;
+    }
+
+    &-right {
+      flex-basis: 330px;
+    }
+  }
+
+  .text {
+    &-bold {
+      font-size: 32px;
+      margin-bottom: 24px;
+    }
+
+    &-normal {
+      font-size: 21px;
+      line-height: 32px;
+    }
+  }
+
+  .button {
+    font-size: 18px;
+    padding: 6px 18px;
+  }
+
+  .icon {
+    font-size: 120px;
+  }
+}

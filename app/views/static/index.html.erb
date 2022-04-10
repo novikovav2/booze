@@ -1,13 +1,87 @@
-<div class="container">
   <div class="row">
-    <div class="row-left">
-      <p class="text">
-        Хотите честно делить все траты с вечеринок, поездок и других мероприятий,
-        где участвует много людей?
-      </p>
-      <%= link_to 'Присоединяйтесь', new_user_session_path, class: 'button' %>
-    </div>
-    <div class="row-right">
+    <div class="container">
+      <div class="row-left">
+        <div class="text">
+          <p class="text-bold">
+            Хотите честно делить все траты
+          </p>
+          <p class="text-normal">
+            с вечеринок, поездок и других мероприятий,
+            где участвует много людей?
+          </p>
+        </div>
+        <%= link_to 'Присоединяйтесь', new_user_session_path, class: 'button' %>
+      </div>
+      <div class="row-right bg-image">
+      </div>
     </div>
   </div>
-</div>
+  <div class="row bg-blue">
+    <div class="container">
+      <div class="row-left">
+        <i class="fa-solid fa-user-plus icon icon-orange"></i>
+      </div>
+      <div class="row-right">
+        <div class="text">
+          <p class="text-bold">
+            Пригласите участников
+          </p>
+          <p class="text-normal">
+            присоединиться к мероприятию
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="container">
+      <div class="row-left">
+        <div class="text">
+          <p class="text-bold">
+            Внесите траты
+          </p>
+          <p class="text-normal">
+            указав кто за что платил
+          </p>
+        </div>
+      </div>
+      <div class="row-right">
+        <i class="fa-solid fa-martini-glass-citrus icon icon-gray"></i>
+      </div>
+    </div>
+  </div>
+  <div class="row bg-blue">
+    <div class="container">
+      <div class="row-left">
+        <i class="fa-solid fa-list-check icon icon-blue"></i>
+      </div>
+      <div class="row-right">
+        <div class="text">
+          <p class="text-bold">
+            Отметьте
+          </p>
+          <p class="text-normal">
+            что каждый из участников ел/пил
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="container">
+      <div class="row-left">
+        <div class="text">
+          <p class="text-bold">
+            Получите результ
+          </p>
+          <p class="text-normal">
+            где будет автоматически расчитано кто кому сколько должен перевести
+          </p>
+        </div>
+        <%= link_to 'Попробовать', new_user_session_path, class: 'button' %>
+      </div>
+      <div class="row-right">
+        <i class="fa-solid fa-face-smile icon icon-brand"></i>
+      </div>
+    </div>
+  </div>

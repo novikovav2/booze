@@ -1,13 +1,18 @@
 // Place all the styles related to the static controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import "variables";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .header {
   height: 80px;
+  background-color: $brandColor;
 
   &-container {
     max-width: 1044px;
@@ -24,7 +29,7 @@
     font-size: 36px;
     line-height: 42px;
     text-align: center;
-    color: #4C629B;
+    color: $white;
     text-decoration: none;
     margin-left: 36px;
   }
@@ -33,38 +38,55 @@
 .container {
   max-width: 1044px;
   margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
 }
 
 .row {
-  display: flex;
   height: 600px;
-  margin-top: 42px;
-  flex-wrap: wrap;
+  //margin-top: 42px;
 
   &-left {
-    flex: 1;
+    flex: 1 0 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 
   &-right {
-    flex: 1;
-    background-image: asset_url("image.png");
-    background-repeat: no-repeat;
+    flex: 1 0 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 }
 
 .text {
-  font-family: 'Roboto', 'sans-serif';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 38px;
-  text-align: center;
-  color: #9E9E9E;
-  max-width: 400px;
-  margin-top: 80px;
+  //max-width: 400px;
+  //margin-top: 20px;
+
+  &-normal {
+    font-family: 'Roboto', 'sans-serif';
+    font-style: normal;
+    font-size: 26px;
+    line-height: 42px;
+    text-align: center;
+    color: $gray6;
+  }
+
+  &-bold {
+    font-family: 'Roboto', 'sans-serif';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 40px;
+    text-align: center;
+    color: $gray9;
+    margin-bottom: 52px;
+  }
 }
 
 .button {
@@ -76,7 +98,6 @@
   border-radius: 6px;
   margin-top: 32px;
   width: content-box;
-  font-family: 'Roboto', 'sans-serif';
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
@@ -88,3 +109,51 @@
     box-shadow: 0 0 5px #4C629B;
   }
 }
+
+.footer {
+  height: 60px;
+  background-color: $white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  &-text {
+    font-size: 12px;
+    color: $gray4;
+  }
+}
+
+.bg-blue {
+  background-color: $body_bg;
+}
+
+.bg-image {
+  background-image: asset_url("image.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.icon {
+  font-size: 200px;
+
+  &-blue {
+    color: $blue;
+  }
+
+  &-orange {
+    color: $orange;
+  }
+
+  &-gray {
+    color: $gray6;
+  }
+
+  &-brand {
+    color: $brandColor;
+  }
+}
+
+@import "medium/static";
+@import "small/static";
