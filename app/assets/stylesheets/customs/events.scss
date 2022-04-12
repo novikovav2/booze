@@ -144,6 +144,7 @@
 
   &-reason {
     display: flex;
+    flex-wrap: wrap;
     margin-bottom: 16px;
   }
 
@@ -152,13 +153,12 @@
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
-    font-size: 18px;
     line-height: 21px;
     color: $dark;
   }
 
   &-fieldvalue {
-    flex: 1 0 auto;
+    flex: 1 1;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
