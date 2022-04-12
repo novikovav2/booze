@@ -62,6 +62,14 @@
     align-items: center;
     justify-content: center;
   }
+
+  &-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+  }
 }
 
 .text {
@@ -86,6 +94,13 @@
     text-align: center;
     color: $gray9;
     margin-bottom: 52px;
+  }
+
+  &-help {
+    font-size: 18px;
+    color: $gray5;
+    margin-top: 10px;
+    text-align: center;
   }
 }
 
@@ -116,7 +131,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
+  max-width: 1044px;
   margin: 0 auto;
 
   &-text {
@@ -127,6 +142,10 @@
 
 .bg-blue {
   background-color: $body_bg;
+}
+
+.bg-orange {
+  background-color: $orange;
 }
 
 .bg-image {
@@ -154,6 +173,12 @@
     color: $brandColor;
   }
 }
+
+.full-height {
+  height: calc(100vh - 140px);
+}
+
+
 
 @import "medium/static";
 @import "small/static";

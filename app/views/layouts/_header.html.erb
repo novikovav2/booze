@@ -13,8 +13,13 @@
     <a href="#" class="header-menu-close" id="header-menu-close">
       <i class="fa-solid fa-xmark"></i>
     </a>
-    <%= link_to current_user.username, profile_path, class: 'header-text' %>
-    <%= link_to 'Выход', destroy_user_session_path, method: :delete, class: 'header-text' %>
+    <% if user_signed_in? %>
+      <%= link_to current_user.username, profile_path, class: 'header-text' %>
+      <%= link_to 'Выход', destroy_user_session_path, method: :delete, class: 'header-text' %>
+    <% else %>
+      <%= link_to 'Войти', new_user_session_path, class: 'header-text' %>
+    <% end %>
+
   </nav>
 
 </header>

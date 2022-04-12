@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[add_bot remove_member]
   before_action :set_event, only: %i[add_bot leave remove_member]
   before_action :only_members, only: %i[leave]
 
@@ -22,7 +22,7 @@ class MembersController < ApplicationController
 
   # GET /join/:id
   def join
-    @event = Event.where(join_id: params[:id])[0]
+    @event = Event.find_by_id(params[:id])
     if @event
       exist_user = @event.members.find_by_id(current_user.id) || @event.user == current_user
       if exist_user
@@ -44,15 +44,17 @@ class MembersController < ApplicationController
 
   # DELETE /leave/:event_id/:user_id
   def remove_member
-    if @event.user == current_user            # Check if current_user is author of event
       user = User.find_by_id(params[:user_id])
       if user                                 # Check if user exist
         is_member = @event.members.include?(user)
         if is_member                          # Check if user is member of event
           # Check if user bought products
           has_products = @event.products.where({ buyer_id: user.id }).length
+          was_eater = Eater.where({user_id: user.id}).length
           if has_products > 0
             redirect_to event_path(@event), alert: 'Участник скидывался на покупки. Его нельзя просто так удалить'
+          elsif was_eater > 0
+            redirect_to event_path(@event), alert: 'Участник ел продукты. Его нельзя просто так удалить'
           else
             @event.members.destroy(user)
             if user.isBot
@@ -63,7 +65,6 @@ class MembersController < ApplicationController
           end
         end
       end
-    end
   end
 
   private

@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update destroy results change_status]
-  before_action :authenticate_user!
-  before_action :only_members, only: %i[show edit update destroy results]
+  before_action :authenticate_user!, except: %i[create_quest show edit update results ]
+  before_action :only_members, only: %i[destroy ]
 
   # GET /events or /events.json
   def index
@@ -19,11 +19,9 @@ class EventsController < ApplicationController
     @product = Product.new
     @products = @event.products
 
-    @members = []
-    @members << @event.user
-    @members = (@members + @event.members.to_a).uniq
+    prepare_members
 
-    @owner = @event.user == current_user
+    @owner = user_signed_in? ? @event.user == current_user : false
   end
 
   # GET /events/new
@@ -51,6 +49,29 @@ class EventsController < ApplicationController
     end
   end
 
+  # POST /events/quest
+  def create_quest
+    quest_email = SecureRandom.hex(20) + '@quest.com'
+    quest_password = SecureRandom.base64(12)
+    quest = User.new(email: quest_email, password: quest_password, isQuest: true )
+    quest.skip_confirmation!
+    quest.save!
+
+    event_params = {
+      name: 'Просто по пиву',
+      description: 'Для такого специальный повод не нужен',
+      evented_at: Date.today
+    }
+    @event = quest.events.new(event_params)
+    @event.join_id = (0...8).map { rand(65..90).chr }.join
+    if @event.save
+      redirect_to @event, notice: 'Добро пожаловать!'
+    else
+      redirect_to welcome_path, alert: 'Что-то пошло не так ;-('
+    end
+
+  end
+
   # PATCH/PUT /events/1 or /events/1.json
   def update
     respond_to do |format|
@@ -75,9 +96,7 @@ class EventsController < ApplicationController
 
   # GET /events/:id/results
   def results
-    @members = []
-    @members << @event.user
-    @members += @event.members
+    prepare_members
 
     @results = []
     @members.each do |member|
@@ -138,11 +157,17 @@ class EventsController < ApplicationController
   end
 
   def only_members
-    members = []
-    members << @event.user
-    members += @event.members
+    prepare_members
     # Если пользователь не участник встречи - перенаправляем на главную,
     # чтобы не видел результаты
-    redirect_to root_path unless members.include?(current_user)
+    redirect_to root_path unless @members.include?(current_user)
+  end
+
+  def prepare_members
+    @members = []
+    unless @event.user.isQuest
+      @members << @event.user
+    end
+    @members = (@members + @event.members.to_a).uniq
   end
 end

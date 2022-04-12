@@ -15,8 +15,10 @@
             <td>К-во</td>
             <td>Купил</td>
             <td>Употребляло</td>
-            <td>Ты съел</td>
-            <td>Ты употреблял?</td>
+            <% if user_signed_in? %>
+              <td>Ты съел</td>
+              <td>Ты употреблял?</td>
+            <% end %>
           </tr>
           </thead>
           <tbody>
@@ -52,27 +54,29 @@
                   </ul>
                 </div>
               </td>
-              <% ate_total = Eater.where({product_id: product.id, user_id: current_user.id}).length %>
-              <td>
-                <% if product.total %>
-                  <%= ate_total %> шт.
-                <% else %>
-                  -
-                <% end %>
-              </td>
-              <td>
-                <% if ate_total == 0 %>
-                  Нет
-                  <%=  link_to ' (Изменить)', add_eater_path(product), class: 'link', method: :put, remote: true  %>
-                <% elsif product.total %>
-                  Да  <%=  link_to '(+1)', add_eater_path(product), class: 'link', method: :put, remote: true  %>
-                  /
-                  <%= link_to 'Нет', delete_eater_path(product), class: 'link', method: :delete, remote: true %>
-                <% else %>
-                  Да
-                  <%= link_to ' (Изменить)', delete_eater_path(product), class: 'link', method: :delete, remote: true %>
-                <% end %>
-              </td>
+              <% if user_signed_in? %>
+                <% ate_total = Eater.where({product_id: product.id, user_id: current_user.id}).length %>
+                <td>
+                  <% if product.total %>
+                    <%= ate_total %> шт.
+                  <% else %>
+                    -
+                  <% end %>
+                </td>
+                <td>
+                  <% if ate_total == 0 %>
+                    Нет
+                    <%=  link_to ' (Изменить)', add_eater_path(product), class: 'link', method: :put, remote: true  %>
+                  <% elsif product.total %>
+                    Да  <%=  link_to '(+1)', add_eater_path(product), class: 'link', method: :put, remote: true  %>
+                    /
+                    <%= link_to 'Нет', delete_eater_path(product), class: 'link', method: :delete, remote: true %>
+                  <% else %>
+                    Да
+                    <%= link_to ' (Изменить)', delete_eater_path(product), class: 'link', method: :delete, remote: true %>
+                  <% end %>
+                </td>
+              <% end %>
             </tr>
           <% end %>
           </tbody>

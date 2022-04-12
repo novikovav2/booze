@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   #root to: 'events#index'
   #get '/index', to: 'static#index'
   root to: 'static#index'
+  get '/welcome', to: 'static#welcome', as: 'welcome'
 
   resources :products, only: %i[create destroy show update]
   get '/products/:id/eaters', to: 'products#eaters'
@@ -29,6 +30,8 @@ Rails.application.routes.draw do
 
   get '/events/:id/results', to: 'events#results', as: 'event_results'
   post '/events/:id/change_status', to: 'events#change_status', as: 'change_status'
+
+  post '/quest', to: 'events#create_quest', as: 'quest'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

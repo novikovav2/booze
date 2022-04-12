@@ -1,0 +1,17 @@
+<div class="row full-height">
+  <div class="container">
+    <div class="row-center">
+      <p class="text-normal">
+        Выберите как хотите продолжить:
+      </p>
+      <%= link_to 'Без регистрации', quest_path, class: 'button bg-orange', method: :post %>
+      <p class="text-help">
+        Быстрый старт
+      </p>
+      <%= link_to 'С регистрацией', new_user_session_path, class: 'button' %>
+      <p class="text-help">
+        Возможность сохранить мероприятие в личном кабинете
+      </p>
+    </div>
+  </div>
+</div>

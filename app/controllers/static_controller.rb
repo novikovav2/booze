@@ -6,4 +6,8 @@ class StaticController < ApplicationController
       redirect_to events_path
     end
   end
+
+  def welcome
+
+  end
 end

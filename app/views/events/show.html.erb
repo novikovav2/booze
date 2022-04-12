@@ -2,8 +2,10 @@
   <div class="card bg-gray1">
     <div class="row w-100 jc-sb">
       <h1 class="title events-title">
-        <%= link_to events_path, class: 'back-link' do %>
-          <i class="fa-regular fa-circle-left"></i>
+        <% if user_signed_in? %>
+          <%= link_to events_path, class: 'back-link' do %>
+            <i class="fa-regular fa-circle-left"></i>
+          <% end %>
         <% end %>
         <%= @event.name %>
         <% if @event.archived? %>
@@ -53,21 +55,26 @@
     <div class="card">
       <div class="card-header">
         Участники
-        <% unless @owner %>
-          <%=  link_to 'Покинуть', leave_path(@event), class: 'leave-link',
-                       data: { confirm: 'Вы убеверны, что не хотите участвовать в этом веселье?'}  %>
+        <% if user_signed_in? %>
+
+          <%=  link_to 'Участвовать', join_path(@event), class: 'leave-link' %>
         <% end %>
       </div>
       <div class="card-body">
-        <div class="join">
-          <p class="join-title">Пригласить:</p>
-          <%= link_to join_url(@event.join_id), "#", class: 'join-link', id: 'join-link' %>
+<!--        <div class="join">-->
+<!--          <p class="join-title">Пригласить:</p>-->
+          <%#= link_to join_url(@event.join_id), "#", class: 'join-link', id: 'join-link' %>
 
-          <div class="join-confirm" id="join-confirm">
-            Скопировано!
-          </div>
-        </div>
+<!--          <div class="join-confirm" id="join-confirm">-->
+<!--            Скопировано!-->
+<!--          </div>-->
+<!--        </div>-->
         <div class="members">
+          <% if @members.length == 0 %>
+            <p class="add-bot-subheader">
+              Пока участников нет
+            </p>
+          <% end %>
           <ul>
             <% @members.each do |member| %>
               <li class="members-item">
@@ -76,10 +83,10 @@
                 <% if member == @event.user %>
                   (Организатор)
                 <% else %>
-                  <% if current_user == @event.user %>
+                  <%# if current_user == @event.user %>
                     <%= link_to 'удалить', remove_member_path(@event, member.id),
                                 method: :delete, class: 'remove-link' %>
-                  <% end %>
+                  <%# end %>
                 <% end %>
               </li>
             <% end %>
@@ -111,4 +118,4 @@
 <%= render '/products/products', products: @products %>
 
 
-<%= javascript_pack_tag 'events/join' %>
+<%#= javascript_pack_tag 'events/join' %>

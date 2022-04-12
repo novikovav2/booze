@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[create destroy show eaters update_eaters]
   before_action :set_product, only: %i[destroy add_eater delete_eater show update eaters update_eaters]
 
   def create
@@ -22,6 +22,7 @@ class ProductsController < ApplicationController
     Eater.where({ product_id: @product.id }).destroy_all
     @product.destroy
     @products = @event.products
+    prepare_members
     respond_to do |format|
       format.html { redirect_to event_path(@event), notice: 'Продукт удален' }
       format.json { head :no_content }
@@ -76,11 +77,9 @@ class ProductsController < ApplicationController
     @eaters = User.joins('INNER JOIN eaters ON users.id = eaters.user_id')
                   .where(eaters: {product_id: @product.id}).to_a.uniq
 
-    members = []
-    members << @event.user
-    members = (members + @event.members.to_a).uniq
+    prepare_members
 
-    @non_eaters = members.difference(@eaters)     # Array of event members and not product eaters
+    @non_eaters = @members.difference(@eaters)     # Array of event members and not product eaters
 
     respond_to do |format|
       format.json { render status: :ok}
@@ -112,8 +111,14 @@ class ProductsController < ApplicationController
 
   def prepare_for_form
     @product = Product.new
+    prepare_members
+  end
+
+  def prepare_members
     @members = []
-    @members << @event.user
+    unless @event.user.isQuest
+      @members << @event.user
+    end
     @members = (@members + @event.members.to_a).uniq
   end
 end
