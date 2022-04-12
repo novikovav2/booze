@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_12_102834) do
+ActiveRecord::Schema.define(version: 2022_04_12_203936) do
 
   create_table "eaters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id", null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2022_04_12_102834) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "join_id"
     t.integer "status", default: 0
+    t.boolean "isPublic", default: false
     t.index ["join_id"], name: "index_events_on_join_id", unique: true
     t.index ["user_id"], name: "index_events_on_user_id"
   end

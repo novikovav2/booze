@@ -45,6 +45,18 @@
             <%= I18n.l(@event.evented_at.to_time, :format => '%e %B %Y') if @event.evented_at %>
           </p>
         </div>
+        <div class="event-reason">
+          <p class="event-fieldname">
+            Тип:
+          </p>
+          <p class="event-fieldvalue">
+            <% if @event.isPublic %>
+              Открытое мероприятие
+            <% else %>
+              Закрытое мероприятие
+            <% end %>
+          </p>
+        </div>
       </div>
       <div class="card-footer">
         <%= link_to 'Подвести итоги', event_results_path(@event), class: 'result-link' %>
@@ -55,8 +67,7 @@
     <div class="card">
       <div class="card-header">
         Участники
-        <% if user_signed_in? %>
-
+        <% if user_signed_in? && !@is_member %>
           <%=  link_to 'Участвовать', join_path(@event), class: 'leave-link' %>
         <% end %>
       </div>
@@ -84,8 +95,10 @@
                   (Организатор)
                 <% else %>
                   <%# if current_user == @event.user %>
-                    <%= link_to 'удалить', remove_member_path(@event, member.id),
-                                method: :delete, class: 'remove-link' %>
+                    <%= link_to remove_member_path(@event, member.id),
+                                method: :delete, class: 'remove-link' do %>
+                    <i class="fa-solid fa-trash"></i>
+                    <% end %>
                   <%# end %>
                 <% end %>
               </li>

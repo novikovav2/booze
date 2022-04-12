@@ -70,6 +70,13 @@
       outline: none;
       border-color: $gray8;
     }
+
+  }
+
+  &-checkbox {
+    margin-left: 36px;
+    padding: 10px;
+    flex-basis: 20px;
   }
 
   &-buttons {
@@ -322,7 +329,6 @@
 .leave-link {
   text-decoration: none;
   color: $orange;
-  color: $orange;
 
   &:hover {
     text-decoration: underline;
@@ -428,7 +434,14 @@
   }
 }
 
+.remove-link {
+  margin-left: 12px;
+  color: $light;
 
+  &:hover {
+    color: darkred;
+  }
+}
 
 @import "events/products-form";
 @import "events/bot-form";

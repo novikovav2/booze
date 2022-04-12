@@ -18,6 +18,11 @@ class EventsController < ApplicationController
     @bot = User.new
     @product = Product.new
     @products = @event.products
+    @is_member = is_member?
+
+    if !@event.isPublic && !@is_member
+      render '/events/not_a_member'
+    end
 
     prepare_members
 
@@ -30,7 +35,9 @@ class EventsController < ApplicationController
   end
 
   # GET /events/1/edit
-  def edit; end
+  def edit
+    @is_member = is_member?
+  end
 
   # POST /events or /events.json
   def create
@@ -60,10 +67,11 @@ class EventsController < ApplicationController
     event_params = {
       name: 'Просто по пиву',
       description: 'Для такого специальный повод не нужен',
-      evented_at: Date.today
+      evented_at: Date.today,
+      isPublic: true
     }
     @event = quest.events.new(event_params)
-    @event.join_id = (0...8).map { rand(65..90).chr }.join
+    @event.join_id = (0...8).map { rand(65..90).chr }.join      # наследие первых версий. Сейчас join_id не нужен, но пока не убираю
     if @event.save
       redirect_to @event, notice: 'Добро пожаловать!'
     else
@@ -153,14 +161,14 @@ class EventsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def event_params
-    params.fetch(:event, {}).permit(:name, :description, :evented_at)
+    params.fetch(:event, {}).permit(:name, :description, :evented_at, :isPublic)
   end
 
   def only_members
-    prepare_members
+    #prepare_members
     # Если пользователь не участник встречи - перенаправляем на главную,
     # чтобы не видел результаты
-    redirect_to root_path unless @members.include?(current_user)
+    redirect_to root_path unless is_member?
   end
 
   def prepare_members
@@ -169,5 +177,15 @@ class EventsController < ApplicationController
       @members << @event.user
     end
     @members = (@members + @event.members.to_a).uniq
+  end
+
+  def is_member?
+    result = false
+    if user_signed_in?
+      prepare_members
+      result = @members.include?(current_user)
+    end
+
+    return result
   end
 end

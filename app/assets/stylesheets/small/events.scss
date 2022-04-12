@@ -129,24 +129,17 @@
       }
     }
   }
-}
 
-.remove-link {
-  margin-left: 16px;
-  color: $light;
+  .add-bot {
+    &-submit {
+      font-size: 14px;
+      line-height: 16px;
+    }
 
-  &:hover {
-    color: darkred;
-  }
-}
-
-.add-bot {
-  &-submit {
-    font-size: 14px;
-    line-height: 16px;
+    &-input {
+      margin-bottom: 12px;
+    }
   }
 
-  &-input {
-    margin-bottom: 12px;
-  }
 }
+
