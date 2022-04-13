@@ -8,6 +8,13 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if @product.save
         @event = @product.event
+        prepare_members
+        # Делаем так, что новый продукт ели все участники
+        @members.each do |member|
+          Eater.create(product_id: @product.id, user_id: member.id)
+        end
+
+        @event = @product.event
         prepare_for_form
         @products = @event.products
         format.js { render template: '/products/show_table' }
