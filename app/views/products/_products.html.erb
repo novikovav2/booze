@@ -9,33 +9,37 @@
         <table class="table">
           <thead>
           <tr>
-            <td>Ты ел v2</td>
+            <% if user_signed_in? %>
+              <td>Ты ел?</td>
+            <% end %>
             <td>Продукт</td>
             <td>Цена</td>
             <td>К-во</td>
             <td>Купил</td>
             <td>Употребляло</td>
             <% if user_signed_in? %>
-              <td>Ты съел</td>
-              <td>Ты употреблял?</td>
+              <td>Ты съел (шт)</td>
+<!--              <td>Ты употреблял?</td>-->
             <% end %>
             <td></td>
           </tr>
           </thead>
           <tbody>
           <% products.each do |product| %>
-            <% ate_total = Eater.where({product_id: product.id, user_id: current_user.id}).length %>
+
             <tr>
+              <% if user_signed_in? %>
               <td>
+                <% ate_total = Eater.where({product_id: product.id, user_id: current_user.id}).length %>
+                  <%= check_box_tag 'ate', ate_total == 0, ate_total > 0,
+                                    data: {
+                                      remote: true,
+                                      url: change_eater_path(product.id),
+                                      method: :post
+                                    } %>
 
-                <%= check_box_tag 'ate', ate_total == 0, ate_total > 0,
-                                  data: {
-                                    remote: true,
-                                    url: change_eater_path(product.id),
-                                    method: :post
-                                  } %>
-
-              </td>
+                </td>
+              <% end %>
               <td>
                 <%= link_to product.name, product_path(product), class: 'link' %>
               </td>
@@ -64,23 +68,24 @@
                 <td>
                   <% if product.total %>
                     <%= ate_total %> шт.
+                    <%=  link_to '(+1)', add_eater_path(product), class: 'link', method: :put, remote: true  %>
                   <% else %>
                     -
                   <% end %>
                 </td>
-                <td>
-                  <% if ate_total == 0 %>
-                    Нет
-                    <%=  link_to ' (Изменить)', add_eater_path(product), class: 'link', method: :put, remote: true  %>
-                  <% elsif product.total %>
-                    Да  <%=  link_to '(+1)', add_eater_path(product), class: 'link', method: :put, remote: true  %>
-                    /
-                    <%= link_to 'Нет', delete_eater_path(product), class: 'link', method: :delete, remote: true %>
-                  <% else %>
-                    Да
-                    <%= link_to ' (Изменить)', delete_eater_path(product), class: 'link', method: :delete, remote: true %>
-                  <% end %>
-                </td>
+<!--                <td>-->
+                  <%# if ate_total == 0 %>
+<!--                    Нет-->
+                    <%#=  link_to ' (Изменить)', add_eater_path(product), class: 'link', method: :put, remote: true  %>
+                  <%# elsif product.total %>
+<!--                    Да  <%#=  link_to '(+1)', add_eater_path(product), class: 'link', method: :put, remote: true  %>-->
+<!--                    /-->
+                    <%#= link_to 'Нет', delete_eater_path(product), class: 'link', method: :delete, remote: true %>
+                  <%# else %>
+<!--                    Да-->
+                    <%#= link_to ' (Изменить)', delete_eater_path(product), class: 'link', method: :delete, remote: true %>
+                  <%# end %>
+<!--                </td>-->
               <% end %>
               <td>
                 <%= link_to product_path(product), method: :delete,

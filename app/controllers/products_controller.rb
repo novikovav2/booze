@@ -38,6 +38,7 @@ class ProductsController < ApplicationController
       Eater.where({ product_id: @product.id, user_id: current_user.id }).destroy_all
     end
     @products = @event.products
+    @product = Product.new
     prepare_members
     respond_to do |format|
       format.js { render template: '/products/show_table' }
