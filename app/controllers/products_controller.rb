@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: %i[create destroy show eaters update_eaters]
-  before_action :set_product, only: %i[destroy add_eater delete_eater show update eaters update_eaters]
+  before_action :set_product, only: %i[destroy change_eater add_eater delete_eater show update eaters update_eaters]
 
   def create
     @product = Product.new(product_params)
@@ -26,6 +26,20 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to event_path(@event), notice: 'Продукт удален' }
       format.json { head :no_content }
+      format.js { render template: '/products/show_table' }
+    end
+  end
+
+  # POST /products/:id/eater
+  def change_eater
+    if params[:ate] == "true"
+      Eater.create(product_id: @product.id, user_id: current_user.id)
+    else
+      Eater.where({ product_id: @product.id, user_id: current_user.id }).destroy_all
+    end
+    @products = @event.products
+    prepare_members
+    respond_to do |format|
       format.js { render template: '/products/show_table' }
     end
   end
@@ -120,5 +134,11 @@ class ProductsController < ApplicationController
       @members << @event.user
     end
     @members = (@members + @event.members.to_a).uniq
+  end
+
+  def add_eater_private(product, event)
+    Eater.create(product_id: product.id, user_id: current_user.id)
+
+    prepare_for_form
   end
 end

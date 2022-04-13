@@ -24,9 +24,17 @@
           </thead>
           <tbody>
           <% products.each do |product| %>
+            <% ate_total = Eater.where({product_id: product.id, user_id: current_user.id}).length %>
             <tr>
               <td>
-                <%= check_box_tag 'eater' %>
+
+                <%= check_box_tag 'ate', ate_total == 0, ate_total > 0,
+                                  data: {
+                                    remote: true,
+                                    url: change_eater_path(product.id),
+                                    method: :post
+                                  } %>
+
               </td>
               <td>
                 <%= link_to product.name, product_path(product), class: 'link' %>
@@ -53,7 +61,6 @@
                 </div>
               </td>
               <% if user_signed_in? %>
-                <% ate_total = Eater.where({product_id: product.id, user_id: current_user.id}).length %>
                 <td>
                   <% if product.total %>
                     <%= ate_total %> шт.
@@ -94,6 +101,3 @@
     </div>
   </div>
 </div>
-
-
-
