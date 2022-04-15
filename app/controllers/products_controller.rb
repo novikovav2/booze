@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, except: %i[create destroy show eaters update_eaters]
+  before_action :authenticate_user!, except: %i[create destroy show eaters update_eaters update]
   before_action :set_product, only: %i[destroy change_eater add_eater delete_eater show update eaters update_eaters]
 
   def create
@@ -96,8 +96,12 @@ class ProductsController < ApplicationController
 
   # GET /products/:id/eaters
   def eaters
+    # @eaters = User.joins('INNER JOIN eaters ON users.id = eaters.user_id')
+    #               .where(eaters: {product_id: @product.id}).to_a.uniq
+
     @eaters = User.joins('INNER JOIN eaters ON users.id = eaters.user_id')
-                  .where(eaters: {product_id: @product.id}).to_a.uniq
+                   .where(eaters: {product_id: @product.id})
+                   .select(:id, 'COUNT(users.id) as count').group(:id)
 
     prepare_members
 
@@ -113,7 +117,13 @@ class ProductsController < ApplicationController
     eaters = params[:eaters]
     Eater.where({ product_id: @product.id }).destroy_all
     eaters.each do |eater|
-      Eater.create(product_id: @product.id, user_id: eater[:id])
+      if eater[:count] > 0
+        (1..eater[:count]).each do |i|
+          Eater.create(product_id: @product.id, user_id: eater[:id])
+        end
+      else
+        Eater.create(product_id: @product.id, user_id: eater[:id])
+      end
     end
     respond_to do |format|
       format.json { render json: { success: true }, status: :ok }

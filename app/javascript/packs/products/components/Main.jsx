@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import List from "./List";
 import Buttons from "./Buttons";
 
@@ -9,6 +9,7 @@ const Main = () => {
     const [nonEatersList, setNonEatersList] = useState([])
     const dataChanged = useRef(false)
     const [dataLoaded, setDataLoaded] = useState(false)
+    const [total, setTotal] = useState(0)
 
     const eaterItemClickHandle = (e) => {
         const id = +e.target.id
@@ -109,34 +110,93 @@ const Main = () => {
         }
     }
 
-    useEffect(async () => {
-        if (dataChanged.current) {
-            await pushDataToDB()
-            dataChanged.current = false
+    const eaterPlusOne = async (e) => {
+        e.preventDefault()
+        const eaterId = +e.target.parentNode.parentNode.id
+        if (eaterId) {
+            const newEaterList = []
+            eatersList.forEach((eater) => {
+                if (eater.id === eaterId) {
+                    ++eater.count
+                }
+                newEaterList.push(eater)
+            })
+            setEatersList(newEaterList)
+            dataChanged.current = true
         }
+    }
+
+    const eaterMinusOne = (e) => {
+        e.preventDefault()
+        const eaterId = +e.target.parentNode.parentNode.id
+        if (eaterId) {
+            const newEaterList = []
+            const newNonEaterList = []
+            eatersList.forEach((eater) => {
+                let item = { ...eater }
+                if (eater.id === eaterId) {
+                    --eater.count
+                }
+                if (eater.count === 0) {
+                    newNonEaterList.push(eater)
+                } else {
+                    newEaterList.push(eater)
+                }
+            })
+            setEatersList(newEaterList)
+
+            if (newNonEaterList.length > 0) {
+                setNonEatersList([...nonEatersList, ...newNonEaterList])
+            }
+            dataChanged.current = true
+        }
+    }
+
+    useEffect(() => {
+        const changeData = async () => {
+            console.log('eaterList after update: ', eatersList)
+            if (dataChanged.current) {
+                console.log("HOOOOOK")
+                await pushDataToDB()
+                dataChanged.current = false
+            }
+        }
+        changeData()
     }, [eatersList])
 
-    useEffect(async () => {
-        const data = await fetchInitialData()
-        if (data.success) {
-            const eaters = data.eatersList.map((item) => {
-                return {...item, selected: false}   // Add selected field to data
-            })
-            const nonEaters = data.nonEatersList.map((item) => {
-                return {...item, selected: false}
-            })
-            setEatersList(eaters)
-            setNonEatersList(nonEaters)
-            setDataLoaded(true)
+    useEffect(() => {
+        const getDate = async () => {
+            const data = await fetchInitialData()
+            if (data.success) {
+                const eaters = data.eatersList.map((item) => {
+                    return {...item, selected: false}   // Add selected field to data
+                })
+                const nonEaters = data.nonEatersList.map((item) => {
+                    return {...item, selected: false}
+                })
+                setEatersList(eaters)
+                setNonEatersList(nonEaters)
+                setDataLoaded(true)
+            }
         }
+        getDate()
     }, [])
 
-
+    useEffect(() => {
+        const getTotalEl = async () => {
+            const totalEl = document.getElementById('total')
+            setTotal(+totalEl.value)
+        }
+        getTotalEl()
+    }, [])
 
     return <div className="eaters-container">
         <List title="Употребляли" list={eatersList}
               clickHandle={eaterItemClickHandle}
               dataLoaded={dataLoaded}
+              numerable={total > 0}
+              plusOne={eaterPlusOne}
+              minusOne={eaterMinusOne}
         />
         <Buttons allToRight={allToRightBtnHandle}
                  allToLeft={allToLeftBtnHandle}

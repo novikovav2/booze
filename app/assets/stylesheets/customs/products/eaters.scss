@@ -4,7 +4,7 @@
   }
 
   &-list {
-    width: 300px;
+    width: 360px;
 
     &_title {
       text-align: center;
@@ -25,6 +25,8 @@
       width: 100%;
       color: black;
       background: #FFFFFF;
+      display: flex;
+      justify-content: space-between;
     }
   }
 

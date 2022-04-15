@@ -10,7 +10,10 @@ const List = (props) => {
             <div className="eaters-list_body">
                 {props.list.map(user =>
                      <ListItem key={user.id} user={user}
-                          clickHandle={props.clickHandle}
+                               numerable={props.numerable}
+                               clickHandle={props.clickHandle}
+                               plusOne={props.plusOne}
+                               minusOne={props.minusOne}
                     />
                 )}
             </div>

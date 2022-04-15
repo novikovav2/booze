@@ -3,11 +3,10 @@
 // of the page.
 
 import React from 'react'
-import ReactDOM from 'react-dom'
+import {createRoot} from 'react-dom/client'
 import Main from "./components/Main";
 
-ReactDOM.render(
-  <Main />,
-  document.getElementById('eaters'),
-)
+
+const root = createRoot(document.getElementById('eaters'))
+root.render(<Main />)
 
