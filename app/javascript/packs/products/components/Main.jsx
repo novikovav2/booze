@@ -154,9 +154,7 @@ const Main = () => {
 
     useEffect(() => {
         const changeData = async () => {
-            console.log('eaterList after update: ', eatersList)
             if (dataChanged.current) {
-                console.log("HOOOOOK")
                 await pushDataToDB()
                 dataChanged.current = false
             }
