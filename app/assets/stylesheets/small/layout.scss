@@ -17,8 +17,10 @@
       z-index: 1;
       background: #FFFFFF;
       border: 1px solid $dark;
-      padding: 12px 12px;
+      padding: 12px 24px 12px;
       border-radius: 8px;
+      height: 100%;
+      top: 0;
 
       &-show {
         display: block;
@@ -34,9 +36,9 @@
 
 
     &-text {
-      font-size: 16px;
+      font-size: 24px;
       color: $gray8;
-      margin-top: 12px;
+      margin-top: 32px;
     }
   }
 
