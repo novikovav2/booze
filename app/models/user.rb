@@ -19,6 +19,6 @@ class User < ApplicationRecord
   def username
     profile = self.profile
 
-    profile && (profile.name || profile.surname) ? profile.name + ' ' + profile.surname : email
+    profile && (profile.name.length > 0 || profile.surname.length > 0) ? profile.name + ' ' + profile.surname : email
   end
 end
