@@ -102,18 +102,11 @@ class ProductsController < ApplicationController
     @eaters = User.joins('INNER JOIN eaters ON users.id = eaters.user_id')
                    .where(eaters: {product_id: @product.id})
                    .select(:id, 'COUNT(users.id) as count').group(:id)
-    @eaters_result = []
-    @eaters.each do |eater|
-      @eaters_result << {
-        id: eater.id,
-        count: eater.count,
-        username: User.find_by_id(eater.id).username
-      }
-    end
 
     prepare_members
 
     @non_eaters = @members.difference(@eaters)     # Array of event members and not product eaters
+
     respond_to do |format|
       format.json { render status: :ok}
     end
@@ -124,7 +117,7 @@ class ProductsController < ApplicationController
     eaters = params[:eaters]
     Eater.where({ product_id: @product.id }).destroy_all
     eaters.each do |eater|
-      if eater[:count] && eater[:count] > 0
+      if eater[:count] > 0
         (1..eater[:count]).each do |i|
           Eater.create(product_id: @product.id, user_id: eater[:id])
         end
