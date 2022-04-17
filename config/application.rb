@@ -21,6 +21,8 @@ module Booze
 
     config.i18n.default_locale = :ru
 
+    config.exceptions_app = self .routes
+
     config.action_mailer.smtp_settings = {
       address: ENV['SMTP_ADDRESS'],
       port: ENV['SMTP_PORT'],

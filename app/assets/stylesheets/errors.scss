@@ -1,0 +1,87 @@
+// Place all the styles related to the errors controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+@import "variables";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  background-color: $body-bg;
+}
+
+.container {
+  min-height: 100vh;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  text-decoration: none;
+  font-family: Roboto, sans-serif;
+  font-size: 64px;
+  margin-bottom: 24px;
+  color: $brandColor;
+}
+
+.card {
+  background-color: white;
+  width: 100%;
+  min-height: 500px;
+  border-radius: 16px;
+  box-shadow: 0 7px 14px 0 rgba(65,69,88,0.1),0 3px 6px 0 rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+
+  &-error_code {
+    font-size: 280px;
+    font-weight: bold;
+    color: $gray3;
+    line-height: 180px;
+  }
+
+  &-error_text {
+    color: $gray8;
+    font-size: 32px;
+    margin-top: 24px;
+    border-bottom: 1px solid $gray7;
+    padding-bottom: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &-text {
+    font-size: 20px;
+    font-weight: normal;
+    color: $gray7;
+    text-align: center;
+    margin-top: 12px;
+  }
+
+  &-button {
+    text-decoration: none;
+    background-color: $blue;
+    padding: 8px 12px;
+    color: white;
+    font-size: 20px;
+    margin-top: 48px;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: $brandColor;
+    }
+  }
+}
+
+@import "small/errors";

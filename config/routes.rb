@@ -34,5 +34,8 @@ Rails.application.routes.draw do
 
   post '/quest', to: 'events#create_quest', as: 'quest'
 
+  get '/404', to: 'errors#not_found'
+  get '/500', to: 'errors#internal_server'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
