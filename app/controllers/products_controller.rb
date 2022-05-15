@@ -125,7 +125,7 @@ class ProductsController < ApplicationController
     eaters = params[:eaters]
     Eater.where({ product_id: @product.id }).destroy_all
     eaters.each do |eater|
-      if eater[:count] > 0
+      if eater[:count] && eater[:count] > 0
         (1..eater[:count]).each do |i|
           Eater.create(product_id: @product.id, user_id: eater[:id])
         end
